@@ -30,3 +30,47 @@
 *.exe
 *.out
 *.app
+libtool
+
+*.m4
+*.in
+*.pc
+*.libs
+*.deps
+*.cache
+*.dirstamp
+*.swp
+*.orig
+*.rej
+
+bin/
+out/
+
+# CMake
+cmake-build-*/
+
+config*
+Makefile
+build-aux
+test_tmp_*
+libtool
+docs/reference*
+docs/*.html
+docs/*.png
+docs/*-ref.rst
+
+.DS_Store
+.idea
+*~
+
+# Compile and link flag files
+bindings/python/*flags
+
+# Logs
+libtorrent_logs*
+*.log
+
+# Python related files and dirs
+*.pyc
+dist
+*.egg-info
