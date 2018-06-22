@@ -1,6 +1,7 @@
 language: cpp
 before_script:
   - sudo apt-get install libboost-test-dev -y
+  - mkdir build
 script:
   - cd build
   - cmake ..
