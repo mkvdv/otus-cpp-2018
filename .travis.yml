@@ -1,0 +1,14 @@
+language: cpp
+before_script:
+  - sudo apt-get install libboost-test-dev -y
+script:
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - cmake --build . --target test
+  - cmake --build . --target package
+deploy:
+  provider: script
+  skip_cleanup: true
+  script:
+  - curl -T cpp_01-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus01/cpp_01/$TRAVIS_BUILD_NUMBER/cpp_01-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
