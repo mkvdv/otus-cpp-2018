@@ -1,3 +1,5 @@
+#include "lib.h"
+
 #include <iostream>
 
 int main(){

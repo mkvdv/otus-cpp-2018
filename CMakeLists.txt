@@ -52,5 +52,5 @@ include(CPack)
 
 # set up testing
 enable_testing()
-add_test(test_version_valid test_main_cli)
+add_test(test_version_valid test_version)
 
