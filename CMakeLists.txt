@@ -36,7 +36,7 @@ target_link_libraries(test_version
 )
 
 # install to bin folder our binaries
-install(TARGETS helloworld RUNTIME_DESTINATION bin)
+install(TARGETS helloworld RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
