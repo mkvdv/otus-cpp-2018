@@ -52,5 +52,5 @@ include(CPack)
 
 # set up testing
 enable_testing()
-add_test(test_version_valid test_version)
+add_test(test_version_valid ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_version)
 
