@@ -11,6 +11,6 @@ deploy:
   provider: script
   skip_cleanup: true
   on:
-      branch: task01
+      branch: task01_gtests
   script:
   - curl -T cpp_01_gtest-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus01_gtest/cpp_01_gtest/0.0.$TRAVIS_BUILD_NUMBER/cpp_01_gtest-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
