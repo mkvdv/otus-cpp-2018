@@ -1,6 +1,5 @@
 language: cpp
 before_script:
-  - sudo apt-get install libboost-test-dev -y
   - mkdir build
 script:
   - cd build
@@ -14,4 +13,4 @@ deploy:
   on:
       branch: task01
   script:
-  - curl -T cpp_01-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus01/cpp_01/$TRAVIS_BUILD_NUMBER/cpp_01-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T cpp_01_gtest-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus01_gtest/cpp_01_gtest/0.0.$TRAVIS_BUILD_NUMBER/cpp_01_gtest-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
