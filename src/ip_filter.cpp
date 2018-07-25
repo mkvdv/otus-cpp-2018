@@ -3,59 +3,67 @@
 #include <cassert>
 #include <fstream>
 
-// #define DEBUG
+//#define DEBUG
 
-const int ERR_CODE = -1;
+namespace {
+	const int ERR_CODE = -1;
+} // anonymous namespace
 
 int main()
 {
-	using namespace std;
+	using namespace otus;
 
 	try {
-		vector<ip_t> ip_pool;
+		std::vector<ip_t> ip_pool;
 
-		for (string line; getline(cin, line);) {
+		for (std::string line; getline(std::cin, line);) {
 			assert(line != "\n" && line != "\t" && !line.empty());
 
-			vector<string> v = split<string>(line, '\t', identity());
-			ip_pool.push_back(split<byte>(v.at(0), '.', [](const string &s) -> byte {
-			  return static_cast<byte>((stoul(s)));
+			std::vector<std::string> v = split<std::string>(line, '\t', identity());
+			ip_pool.push_back(split<std::byte>(v.at(0), '.', [](const std::string &s) -> std::byte {
+			  return static_cast<std::byte>((stoul(s)));
 			}));
 		}
 
 		// reverse lexicographically sort
 		sort(ip_pool.begin(),
 			 ip_pool.end(),
-			 lexicographical_ip_comparator<std::greater<>>());
+			 [](const ip_t &a, const ip_t &b) {
+			   return std::lexicographical_compare(a.cbegin(), a.cend(),
+												   b.cbegin(), b.cend(),
+												   std::greater<>());
+			 });
+
 #ifdef DEBUG
-		cout << "######## reverse lexicographically sort" << endl;
+		std::cout << "######## reverse lexicographically sort" << std::endl;
 #endif
 		print(ip_pool);
 
-		// filter by first byte and output
-		auto ips1 = filter(static_cast<byte>(1), ip_pool);
+		// filter by first std::byte and output
+		auto ips1 = filter(static_cast<std::byte>(1), ip_pool);
 #ifdef DEBUG
-		cout << "######## filter(1)" << endl;
+		std::cout << "######## filter(1)" << std::endl;
 #endif
 		print(ips1);
 
-		// filter by first and second bytes and output
-		auto ips2 = filter(static_cast<const byte>(46), static_cast<const byte>(70), ip_pool);
+		// filter by first and second std::bytes and output
+		auto ips2 =
+			filter(static_cast<const std::byte>(46), static_cast<const std::byte>(70), ip_pool);
 #ifdef DEBUG
-		cout << "######## filter(46, 70)" << endl;
+		std::cout << "######## filter(46, 70)" << std::endl;
 #endif
 		print(ips2);
 
-		// filter by any byte and output
-		auto ips_any = filter_any(static_cast<const byte>(46), ip_pool);
+		// filter by any std::byte and output
+		auto ips_any = filter_any(static_cast<const std::byte>(46), ip_pool);
 #ifdef DEBUG
-		cout << "######## filter_any(46)" << endl;
+		std::cout << "######## filter_any(46)" << std::endl;
 #endif
 		print(ips_any);
 
 	}
-	catch (const exception &e) {
-		cerr << e.what() << endl;
+	catch (const std::exception &e) {
+		std::cerr << e.what() << std::endl;
 		return ERR_CODE;
 	}
 
