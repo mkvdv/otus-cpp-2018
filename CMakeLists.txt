@@ -38,8 +38,8 @@ target_link_libraries(test_utils
     pthread
 )
 
-# # install to bin folder our binaries
-# install(TARGETS ip_filter RUNTIME DESTINATION bin)
+# install to bin folder our binaries
+install(TARGETS ip_filter RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)

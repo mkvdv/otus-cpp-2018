@@ -5,11 +5,11 @@
 
 TEST(GtestSuiteMain, split)
 {
-	using namespace std;
-	string str = "192.168.0.1";
-	vector<byte> result = split<byte>(str, '.', [](const string &s) {
-			return static_cast<byte>((stoul(s)));});
-	vector<byte> expected = {byte(192), byte(168), byte(0), byte(1)};
+	using namespace otus;
+	std::string str = "192.168.0.1";
+	std::vector<std::byte> result = split<std::byte>(str, '.', [](const std::string &s) {
+			return static_cast<std::byte>((stoul(s)));});
+	std::vector<std::byte> expected = {std::byte(192), std::byte(168), std::byte(0), std::byte(1)};
 	
 	ASSERT_EQ(expected, result) ;
 }
