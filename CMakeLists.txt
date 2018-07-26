@@ -17,7 +17,7 @@ add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
 add_executable(ip_filter src/ip_filter.cpp src/filters.cpp src/utils.cpp)
-add_executable(test_utils src/tests.cpp)
+add_executable(test_utils src/tests.cpp src/filters.cpp)
 
 set_target_properties(ip_filter PROPERTIES
     CXX_STANDARD 17
@@ -55,4 +55,4 @@ include(CPack)
 
 # set up testing
 enable_testing()
-add_test(test_utils ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_utils)
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_utils)
