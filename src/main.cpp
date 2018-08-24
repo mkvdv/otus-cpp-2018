@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <map>
+#include <set>
 
 namespace {
   namespace details {
@@ -20,7 +21,7 @@ namespace {
     }
 
     template<class Map>
-    void test_map(Map &map, const std::vector<int> &factorials10, size_t CACHE_SIZE) {
+    void test_map(Map &&map, const std::vector<int> &factorials10, size_t CACHE_SIZE) {
         for (size_t i = 0; i != CACHE_SIZE; ++i) {
             map[i] = factorials10[i];
         }
@@ -31,7 +32,7 @@ namespace {
     }
 
     template<class List>
-    void test_list(List &lst, size_t CACHE_SIZE) {
+    void test_list(List &&lst, size_t CACHE_SIZE) {
         for (int i = static_cast<int>(CACHE_SIZE - 1); i >= 0; --i) {
             lst.push_front(i); // push in "reverse" order, cause we push to head
         }
@@ -59,10 +60,25 @@ namespace {
       otus::mylist<int, otus::otus_allocator<int, CACHE_SIZE>> lst10;
       details::test_list(lst10, CACHE_SIZE);
   }
+
+  void complex_structure_test() {
+      using namespace std;
+      using T = std::vector<std::set<int>>;
+      using Cnt = std::vector<T, otus::otus_allocator<T, 10>>;
+      Cnt lst10;
+
+      T v = {{1}, {2}};
+
+      lst10.push_back(v);
+      lst10.push_back(v);
+      lst10.push_back(std::move(v));
+  }
+
 } // anonymous namespace
 
 int main() {
     test();
+    complex_structure_test();
 
     return 0;
 }

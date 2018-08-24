@@ -6,8 +6,8 @@ namespace otus {
 
   namespace details {
     template<class T>
-    struct Node {
-        Node *next;
+    struct mylist_node {
+        mylist_node *next;
         T value;
     };
   }
@@ -17,15 +17,15 @@ namespace otus {
    */
   template<
       class T,
-      class Alloc = std::allocator<details::Node<T>>
+      class Alloc = std::allocator<details::mylist_node<T>>
   >
   class mylist {
    public:
-      using node_t = details::Node<T>;
+      using node_t = details::mylist_node<T>;
       using NodeAllocator_t = typename std::allocator_traits<Alloc>::template rebind_alloc<node_t>;
 
       using value_type = T;
-      using allocator_type = Alloc; // but reall we use NodeAllocator
+      using allocator_type = Alloc; // but really we use NodeAllocator
       using size_type = std::size_t;
       using difference_type = std::ptrdiff_t;
       using reference = value_type &;
@@ -69,11 +69,10 @@ namespace otus {
       };
 
       mylist() = default;
+      mylist(const mylist &); //  = delete;
       ~mylist();
 
-      mylist(const mylist &other);
-      mylist(mylist &&) noexcept = default;
-
+      mylist(mylist &&) noexcept;
       // move and copy at the same time, swap trick
       mylist &operator=(mylist_iterator other);
 
@@ -83,6 +82,9 @@ namespace otus {
       void push_front(const T &val);
 
       void push_front(T &&val);
+
+      template<class... Args>
+      void emplace_front(Args &&... args);
 
       mylist_iterator begin();
 
@@ -113,11 +115,11 @@ namespace otus {
   template<class T, class Alloc>
   mylist<T, Alloc>::mylist(const mylist &other)
       : size_(other.size_) {
-      // Section 1, point 6 - "Build — Temporary Dummy Node" of
+      // Section 1, point 6 - "Build — Temporary Dummy List Node" of
       // http://cslibrary.stanford.edu/105/LinkedListProblems.pdf
-      node_t dummy;
-      node_t *tail = &dummy;
-      dummy.next = nullptr;
+      node_t *const dummy = allocator.allocate(1);
+      node_t *tail = dummy;
+      dummy->next = nullptr;
 
       node_t *cur_other = other.head_;
 
@@ -130,7 +132,13 @@ namespace otus {
 
           cur_other = cur_other->next;
       }
-      head_ = dummy.next;
+      head_ = dummy->next;
+      allocator.deallocate(dummy, 1);
+  }
+
+  template<class T, class Alloc>
+  mylist<T, Alloc>::mylist(mylist &&other) noexcept {
+      swap(other);
   }
 
   template<class T, class Alloc>
@@ -145,6 +153,7 @@ namespace otus {
       std::swap(allocator, lst.allocator);
       std::swap(size_, lst.size_);
   }
+
   template<class T, class Alloc>
   void mylist<T, Alloc>::push_front(const T &val) {
       node_t *new_node = allocator.allocate(1);
@@ -158,6 +167,16 @@ namespace otus {
   void mylist<T, Alloc>::push_front(T &&val) {
       node_t *new_node = allocator.allocate(1);
       allocator.construct(new_node, node_t{nullptr, std::move(val)});
+      new_node->next = head_;
+      head_ = new_node;
+      ++size_;
+  }
+
+  template<class T, class Alloc>
+  template<class... Args>
+  void mylist<T, Alloc>::emplace_front(Args &&... args) {
+      node_t *new_node = allocator.allocate(1);
+      allocator.construct(new_node, node_t{nullptr, T(std::forward<Args>(args)...)});
       new_node->next = head_;
       head_ = new_node;
       ++size_;

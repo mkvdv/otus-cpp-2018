@@ -1,6 +1,6 @@
 #pragma once
 
-#include "intrusive_fixed_list.h"
+#include "fixed_size_list.h"
 
 #include <new>
 #include <list>
@@ -14,7 +14,6 @@
 namespace otus {
 /**
  * Simple caching allocator
- * @tparam T
  */
   template<class T, std::size_t CACHE_SIZE>
   class otus_allocator {
@@ -26,11 +25,18 @@ namespace otus {
       using const_reference = const T &;
       using size_type = std::size_t;
       using difference_type = std::ptrdiff_t;
+
       template<class U>
       struct rebind { typedef otus_allocator<U, CACHE_SIZE> other; };
 
-      otus_allocator();
-      ~otus_allocator();
+      otus_allocator() = default;
+      otus_allocator(otus_allocator &&) noexcept = default;
+      otus_allocator &operator=(otus_allocator &&) noexcept = default;
+      ~otus_allocator() = default;
+
+      // nocopyable
+      otus_allocator(const otus_allocator &) = delete;
+      otus_allocator &operator=(const otus_allocator &) = delete;
 
       pointer address(reference x) const;
       const_pointer address(const_reference x) const;
@@ -49,14 +55,8 @@ namespace otus {
       size_type max_size() const;
 
    private:
-      std::list<intrusive_fixed_list<T, CACHE_SIZE>> caches_;
+      std::list<fixed_size_list<T, CACHE_SIZE>> caches_;
   };
-
-  template<class T, std::size_t CACHE_SIZE>
-  otus_allocator<T, CACHE_SIZE>::otus_allocator() = default;
-
-  template<class T, size_t CACHE_SIZE>
-  otus_allocator<T, CACHE_SIZE>::~otus_allocator() = default;
 
   template<class T, size_t CACHE_SIZE>
   typename otus_allocator<T, CACHE_SIZE>::pointer
@@ -80,17 +80,17 @@ namespace otus {
       // и надо будет boarder tags или опять slab allocator писать
       if (n == 1) {
           T *res = nullptr;
-          for (intrusive_fixed_list<T, CACHE_SIZE> &cache: caches_) {
-              if (!cache.empty()) {
+          for (fixed_size_list<T, CACHE_SIZE> &cache: caches_) {
+              if (!cache.filled()) {
                   res = cache.alloc();
               }
           }
           if (!res) {
-              caches_.push_front(intrusive_fixed_list<T, CACHE_SIZE>{});
+              caches_.push_front(fixed_size_list<T, CACHE_SIZE>{});
               res = caches_.front().alloc();
           }
 #ifdef DEBUG
-          cout << "From cache got 1 elem of size " << sizeof(T) << " bytes" << endl;
+          cout << "# From cache got 1 elem of size " << sizeof(T) << " bytes" << endl;
 #endif
           return res;
       } else {
@@ -107,7 +107,7 @@ namespace otus {
                                                  otus_allocator::size_type n) {
       using namespace std;
       if (n == 1) {
-          for (intrusive_fixed_list<T, CACHE_SIZE> &cache: caches_) {
+          for (fixed_size_list<T, CACHE_SIZE> &cache: caches_) {
               if (cache.contain_addr(p)) {
                   cache.dealloc(p);
 #ifdef DEBUG
@@ -128,23 +128,35 @@ namespace otus {
 
   template<class T, size_t CACHE_SIZE>
   void otus_allocator<T, CACHE_SIZE>::construct(otus_allocator::pointer p, const_reference val) {
+#ifdef DEBUG
+      std::cout << "[INFO] Construct(p, val) called" << std::endl;
+#endif
       new((void *) p) T(val);
   }
 
   template<class T, size_t CACHE_SIZE>
   template<class U, class... Args>
   void otus_allocator<T, CACHE_SIZE>::construct(U *p, Args &&... args) {
+#ifdef DEBUG
+      std::cout << "[INFO] Construct(p, ...args) called" << std::endl;
+#endif
       ::new((void *) p) U(std::forward<Args>(args)...);
   }
 
   template<class T, size_t CACHE_SIZE>
   void otus_allocator<T, CACHE_SIZE>::destroy(otus_allocator::pointer p) {
+#ifdef DEBUG
+      std::cout << "[INFO] destroy(P* p) called" << std::endl;
+#endif
       p->~T();
   }
 
   template<class T, size_t CACHE_SIZE>
   template<class U>
   void otus_allocator<T, CACHE_SIZE>::destroy(U *p) {
+#ifdef DEBUG
+      std::cout << "[INFO] destroy(U* p) called" << std::endl;
+#endif
       p->~U();
   }
 
