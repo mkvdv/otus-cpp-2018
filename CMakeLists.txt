@@ -22,7 +22,7 @@ add_executable(unit_tests	./tests/alltests.cpp
 					        ./tests/fixed_size_list_tests.cpp
 					        ./tests/allocator_tests.cpp)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address") # it fails otherwise
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fuse-ld=gold") # it fails otherwise
 
 set_target_properties(allocator PROPERTIES
     CXX_STANDARD 17
