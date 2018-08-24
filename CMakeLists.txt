@@ -42,20 +42,20 @@ target_link_libraries(unit_tests
         pthread
         )
 
-# # install to bin folder our binaries
-# install(TARGETS allocator RUNTIME DESTINATION bin)
+# install to bin folder our binaries
+install(TARGETS allocator RUNTIME DESTINATION bin)
 
-# # generate .deb package
-# set(CPACK_GENERATOR DEB)
+# generate .deb package
+set(CPACK_GENERATOR DEB)
 
-# set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-# set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
-# set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-# set(CPACK_PACKAGE_CONTACT noname@nomail.no)
+set(CPACK_PACKAGE_CONTACT noname@nomail.no)
 
-# # include will generate proper code for .deb generation
-# include(CPack)
+# include will generate proper code for .deb generation
+include(CPack)
 
 # # set up testing
 enable_testing()
