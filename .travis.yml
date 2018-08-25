@@ -12,7 +12,7 @@ script:
   - cd build
   - cmake ..
   - cmake --build .
-  - ./build/bin/unit_tests
+  - ./bin/unit_tests
   - cmake --build . --target test
   - cmake --build . --target package
 deploy:
