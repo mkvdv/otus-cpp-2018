@@ -42,6 +42,11 @@ target_link_libraries(unit_tests
         pthread
         )
 
+# # set up testing
+enable_testing()
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unit_tests)
+
+
 # install to bin folder our binaries
 install(TARGETS allocator RUNTIME DESTINATION bin)
 
@@ -56,7 +61,3 @@ set(CPACK_PACKAGE_CONTACT noname@nomail.no)
 
 # include will generate proper code for .deb generation
 include(CPack)
-
-# # set up testing
-enable_testing()
-add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unit_tests)
