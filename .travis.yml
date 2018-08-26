@@ -10,6 +10,7 @@ addons:
 script:
   - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
+  - export LSAN_OPTIONS=verbosity=1:log_threads=1
   - cmake ..
   - cmake --build .
   - ./bin/unit_tests

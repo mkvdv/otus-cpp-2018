@@ -22,18 +22,18 @@ add_executable(unit_tests	./tests/alltests.cpp
 					        ./tests/fixed_size_list_tests.cpp
 					        ./tests/allocator_tests.cpp)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fuse-ld=gold") # it fails otherwise
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address ") # it fails otherwise
 
 set_target_properties(allocator PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-ggdb;-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
+    COMPILE_OPTIONS "-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
 )
 
 set_target_properties(unit_tests PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-ggdb;-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
+    COMPILE_OPTIONS "-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
 )
 
 target_link_libraries(unit_tests
