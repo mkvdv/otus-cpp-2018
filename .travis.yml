@@ -13,7 +13,7 @@ script:
   - export LSAN_OPTIONS=verbosity=1:log_threads=1
   - cmake ..
   - cmake --build .
-  - sudo ./bin/unit_tests
+  - ./bin/unit_tests
   - cmake --build . --target test
   - cmake --build . --target package
 deploy:
@@ -22,4 +22,4 @@ deploy:
   on:
       branch: task03
   script:
-  - curl -T cpp_02-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus03/cpp_03/0.0.$TRAVIS_BUILD_NUMBER/cpp_03-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+  - curl -T cpp_03-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus03/cpp_03/0.0.$TRAVIS_BUILD_NUMBER/cpp_03-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
