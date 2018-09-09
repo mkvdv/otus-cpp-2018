@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.8)
 
-project(cpp_02 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if(ENV{TRAVIS_BUILD_NUMBER})
+    project(cpp_02 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+else()
+    project(cpp_02 VERSION 0.0.1)
+endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -22,15 +26,25 @@ add_executable(test_utils src/tests.cpp src/filters.cpp)
 set_target_properties(ip_filter PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS -Wall -Wextra -Werror -Wpedantic -fsanitize=address
 )
 
 set_target_properties(test_utils PROPERTIES
 	CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS -Wall -Wextra -Werror -Wpedantic -fsanitize=address
     INCLUDE_DIRECTORIES ${GTEST_INCLUDE_DIR}
 )
+
+function(set_warning_flags target)
+        if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+                target_compile_options(${target} PRIVATE "-Wall" "-Wextra" "-pedantic-errors")
+        elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+                target_compile_options(${target} PRIVATE "/W4")
+        endif()
+endfunction()
+
+set_warning_flags(ip_filter)
+set_warning_flags(test_utils)
+
 
 target_link_libraries(test_utils
     gtest

@@ -9,10 +9,10 @@ TEST(GtestSuiteMain, split)
 {
 	using namespace otus;
 	std::string str = "192.168.0.1";
-	std::vector<std::byte> result = split<std::byte>(str, '.', [](const std::string & s) {
-		return static_cast<std::byte>((stoul(s)));
+	ip_t result = split<uint8_t>(str, '.', [](const std::string & s) {
+		return static_cast<uint8_t>((stoul(s)));
 	});
-	std::vector<std::byte> expected = {std::byte(192), std::byte(168), std::byte(0), std::byte(1)};
+	ip_t expected = {uint8_t(192), uint8_t(168), uint8_t(0), uint8_t(1)};
 
 	ASSERT_EQ(expected, result) ;
 }
@@ -23,20 +23,19 @@ class FiltersTest : public ::testing::Test
 protected:
 	void SetUp() override
 	{
-		using namespace otus;
 		for (size_t i = 0; i < POOL_SIZE; ++i)
 		{
-			ip_pool.emplace_back(std::vector<std::byte> {
-				std::byte(i % MODULE), std::byte((i + 5) % MODULE),
-				std::byte((i + 7) % MODULE) , std::byte((i + 11) % MODULE)
+			ip_pool.emplace_back(otus::ip_t {
+				(uint8_t) (i % MODULE),        (uint8_t) ((i + 5) % MODULE),
+				(uint8_t) ((i + 7) % MODULE) , (uint8_t) ((i + 11) % MODULE)
 			});
 		}
 	}
 
 	std::vector<otus::ip_t> ip_pool;
 	const size_t POOL_SIZE = 1024;
-	const std::byte b{42};
-	const size_t MODULE = 255u;
+	const uint8_t b{42};
+	const uint8_t MODULE = 255u;
 };
 
 TEST_F(FiltersTest, filter)

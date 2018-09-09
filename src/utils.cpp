@@ -9,7 +9,7 @@ namespace otus {
 				if (ip_part != ip.cbegin()) {
 					cout << '.';
 				}
-				cout << static_cast<unsigned >(*ip_part);
+				cout << (uint32_t) *ip_part;
 			}
 		}
 	}

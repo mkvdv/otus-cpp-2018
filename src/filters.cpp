@@ -2,7 +2,7 @@
 
 namespace otus {
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter(std::byte first_byte, const std::vector<ip_t> &ip_pool)
+	filter(uint8_t first_byte, const std::vector<ip_t> &ip_pool)
 	{
 		using namespace std;
 		std::vector<std::reference_wrapper<const ip_t>> res;
@@ -17,8 +17,8 @@ namespace otus {
 	}
 
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter(const std::byte first_byte,
-		   const std::byte second_byte,
+	filter(const uint8_t first_byte,
+		   const uint8_t second_byte,
 		   const std::vector<ip_t> &ip_pool)
 	{
 		using namespace std;
@@ -34,10 +34,10 @@ namespace otus {
 	}
 
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter_any(const std::byte any_byte, const std::vector<ip_t> &ip_pool)
+	filter_any(const uint8_t any_byte, const std::vector<ip_t> &ip_pool)
 	{
 		using namespace std;
-		std::vector<std::reference_wrapper<const ip_t>> res;
+		vector<reference_wrapper<const ip_t>> res;
 
 		for (const auto &ip: ip_pool) {
 			if (ip[0] == any_byte || ip[1] == any_byte || ip[2] == any_byte || ip[3] == any_byte) {

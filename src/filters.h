@@ -5,13 +5,13 @@
 
 namespace otus {
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter(std::byte first_byte, const std::vector<ip_t> &ip_pool);
+	filter(uint8_t first_byte, const std::vector<ip_t> &ip_pool);
 
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter(std::byte first_byte,
-		   std::byte second_byte,
+	filter(uint8_t first_byte,
+		   uint8_t second_byte,
 		   const std::vector<ip_t> &ip_pool);
 
 	std::vector<std::reference_wrapper<const ip_t>>
-	filter_any(std::byte any_byte, const std::vector<ip_t> &ip_pool);
+	filter_any(uint8_t any_byte, const std::vector<ip_t> &ip_pool);
 }

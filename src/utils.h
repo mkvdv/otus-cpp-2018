@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <functional>
 #include <sstream>
+#include <cstdint>
 
 namespace otus {
 	struct identity {
@@ -15,7 +16,7 @@ namespace otus {
 		}
 	};
 
-	using ip_t = std::vector<std::byte>;
+	using ip_t = std::vector<uint8_t>;
 
 	void print(const std::vector<ip_t> &ip_pool);
 	void print(const std::vector<std::reference_wrapper<const ip_t>> &ip_pool);
@@ -57,22 +58,20 @@ namespace otus {
 			bool operator()(const ip_t &a, const ip_t &b) const
 			{
 				Less less;
-				size_t a_beg = 0;
-				size_t b_beg = 0;
+				size_t beg = 0;
 				size_t a_end = a.size();
 				size_t b_end = b.size();
 
-				while (a_beg != a_end && b_beg != b_end) {
-					if (less(a[a_beg], b[b_beg])) {
+				while (beg != a_end && beg != b_end) {
+					if (less(a[beg], b[beg])) {
 						return true;
 					}
-					if (less(b[b_beg], a[a_beg])) {
+					if (less(b[beg], a[beg])) {
 						return false;
 					}
-					++a_beg;
-					++b_beg;
+					++beg;
 				}
-				return a_beg == a_end && b_beg != b_end;
+				return beg == a_end && beg != b_end;
 			}
 		};
 	}
