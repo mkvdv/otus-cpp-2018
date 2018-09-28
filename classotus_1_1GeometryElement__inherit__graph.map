@@ -1,0 +1,5 @@
+<map id="otus::GeometryElement" name="otus::GeometryElement">
+<area shape="rect" id="node2" href="$classotus_1_1Dot.html" title="{otus::Dot\n||+ Dot()\l+ draw()\l+ getX()\l+ getY()\l}" alt="" coords="5,190,80,311"/>
+<area shape="rect" id="node3" href="$classotus_1_1Line.html" title="{otus::Line\n||+ Line()\l+ draw()\l+ getX()\l+ getY()\l}" alt="" coords="105,190,183,311"/>
+<area shape="rect" id="node4" href="$classotus_1_1Rectangle.html" title="{otus::Rectangle\n||+ Rectangle()\l+ draw()\l+ getX()\l+ getY()\l}" alt="" coords="208,190,323,311"/>
+</map>

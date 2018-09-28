@@ -1,0 +1,4 @@
+<map id="otus::Observer" name="otus::Observer">
+<area shape="rect" id="node2" href="$classotus_1_1ViewInterface.html" title="{otus::ViewInterface\n||+ redraw()\l+ response()\l}" alt="" coords="5,147,139,239"/>
+<area shape="rect" id="node3" href="$classotus_1_1StandardView.html" title="{otus::StandardView\n||+ StandardView()\l+ redraw()\l}" alt="" coords="4,289,139,381"/>
+</map>

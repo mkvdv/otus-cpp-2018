@@ -1,0 +1,11 @@
+<map id="src/view/view.h" name="src/view/view.h">
+<area shape="rect" id="node2" href="$iview_8h.html" title="File with interface of abstract view (V from MVC). " alt="" coords="33,80,95,107"/>
+<area shape="rect" id="node5" href="$view__elements_8h.html" title="File with declaration of button and canvas classes. " alt="" coords="267,80,387,107"/>
+<area shape="rect" id="node11" href="$imodel_8h.html" title="File with interface of abstract model (from MVC). " alt="" coords="120,80,243,107"/>
+<area shape="rect" id="node13" href="$icontroller_8h.html" title="File with interface of abstract controller (from MVC). " alt="" coords="411,80,569,107"/>
+<area shape="rect" id="node3" href="$observe_8h.html" title="File with declaration of observer pattern &#45; Observer and Observable. " alt="" coords="5,155,123,181"/>
+<area shape="rect" id="node6" href="$onclick_8h.html" title="File with declaration of observer pattern classes. Two pairs of publishers and subscribers: OnClickLi..." alt="" coords="492,155,607,181"/>
+<area shape="rect" id="node7" href="$geometry__elements_8h.html" title="File with declaration of geometry element classes. " alt="" coords="241,155,388,181"/>
+<area shape="rect" id="node8" href="$logger_8h.html" title="File with simple logger class declaration. " alt="" coords="197,229,304,256"/>
+<area shape="rect" id="node9" href="$tags_8h.html" title="File with declaration of some tool and color tags. Used as color and tool mode flag in model (M from ..." alt="" coords="329,229,428,256"/>
+</map>

@@ -1,0 +1,7 @@
+<map id="src/model/model.h" name="src/model/model.h">
+<area shape="rect" id="node2" href="$imodel_8h.html" title="File with interface of abstract model (from MVC). " alt="" coords="287,80,357,107"/>
+<area shape="rect" id="node3" href="$geometry__elements_8h.html" title="File with declaration of geometry element classes. " alt="" coords="49,155,239,181"/>
+<area shape="rect" id="node6" href="$observe_8h.html" title="File with declaration of observer pattern &#45; Observer and Observable. " alt="" coords="263,155,381,181"/>
+<area shape="rect" id="node4" href="$logger_8h.html" title="File with simple logger class declaration. " alt="" coords="5,229,112,256"/>
+<area shape="rect" id="node5" href="$tags_8h.html" title="File with declaration of some tool and color tags. Used as color and tool mode flag in model (M from ..." alt="" coords="137,229,236,256"/>
+</map>
