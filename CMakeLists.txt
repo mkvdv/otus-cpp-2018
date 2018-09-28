@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8)
 
-if(ENV{TRAVIS_BUILD_NUMBER})
+if($ENV{TRAVIS_BUILD_NUMBER})
 	project(cpp_05 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else()
 	project(cpp_05 VERSION 0.0.1)
