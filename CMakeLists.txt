@@ -4,7 +4,7 @@ project(cpp_04 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(print_ip	./src/main.cpp ./src/utils.cpp)
+add_executable(print_ip	./src/main.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fuse-ld=gold") # otherwise it fails
 
