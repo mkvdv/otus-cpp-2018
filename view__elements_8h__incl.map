@@ -1,0 +1,6 @@
+<map id="src/view/view_elements.h" name="src/view/view_elements.h">
+<area shape="rect" id="node2" href="$onclick_8h.html" title="File with declaration of observer pattern classes. Two pairs of publishers and subscribers: OnClickLi..." alt="" coords="5,80,120,107"/>
+<area shape="rect" id="node4" href="$geometry__elements_8h.html" title="File with declaration of geometry element classes. " alt="" coords="144,80,291,107"/>
+<area shape="rect" id="node5" href="$logger_8h.html" title="File with simple logger class declaration. " alt="" coords="134,155,241,181"/>
+<area shape="rect" id="node6" href="$tags_8h.html" title="File with declaration of some tool and color tags. Used as color and tool mode flag in model (M from ..." alt="" coords="267,155,365,181"/>
+</map>

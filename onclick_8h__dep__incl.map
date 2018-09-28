@@ -1,0 +1,11 @@
+<map id="src/utils/onclick.h" name="src/utils/onclick.h">
+<area shape="rect" id="node2" href="$icontroller_8h.html" title="File with interface of abstract controller (from MVC). " alt="" coords="161,80,329,107"/>
+<area shape="rect" id="node8" href="$view__elements_8h.html" title="File with declaration of button and canvas classes. " alt="" coords="353,80,527,107"/>
+<area shape="rect" id="node10" href="$onclick_8cpp.html" title="File with implementation of observer pattern classes. " alt="" coords="551,80,689,107"/>
+<area shape="rect" id="node3" href="$controller_8h.html" title="File with controller (from MVC) declaration. " alt="" coords="327,155,491,181"/>
+<area shape="rect" id="node6" href="$view_8h.html" title="File with declaration of view (V from MVC). " alt="" coords="189,155,301,181"/>
+<area shape="rect" id="node4" href="$controller_8cpp.html" title="File with controller (from MVC) implementation. " alt="" coords="156,229,335,256"/>
+<area shape="rect" id="node5" href="$tester_8cpp.html" title="File with tester class for the whole programm. " alt="" coords="359,229,461,256"/>
+<area shape="rect" id="node7" href="$view_8cpp.html" title="File with implementation of view (V from MVC). " alt="" coords="5,229,131,256"/>
+<area shape="rect" id="node9" href="$view__elements_8cpp.html" title="File with implementation of button and canvas classes. " alt="" coords="516,155,703,181"/>
+</map>
