@@ -1,5 +1,0 @@
-<map id="otus::StandardController" name="otus::StandardController">
-<area shape="rect" id="node2" href="$classotus_1_1ControllerInterface.html" title="{otus::ControllerInterface\n||+ open_file()\l+ save_file()\l+ clear()\l+ choose_tool()\l+ choose_color()\l+ ~ControllerInterface()\l}" alt="" coords="99,147,261,298"/>
-<area shape="rect" id="node3" href="$classotus_1_1OnClickListener.html" title="{otus::OnClickListener\n||+ on_click()\l+ ~OnClickListener()\l}" alt="" coords="5,6,152,98"/>
-<area shape="rect" id="node4" href="$classotus_1_1OnCoordinateClickListener.html" title="{otus::OnCoordinateClickListener\n||+ on_click()\l+ ~OnCoordinateClickListener()\l}" alt="" coords="176,6,385,98"/>
-</map>

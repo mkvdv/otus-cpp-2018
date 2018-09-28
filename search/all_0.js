@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['abstractgeometryfactory',['AbstractGeometryFactory',['../classotus_1_1AbstractGeometryFactory.html',1,'otus']]],
-  ['add_5felement',['add_element',['../classotus_1_1ModelInterface.html#a7e67066980b520b724fc7da2464db5ab',1,'otus::ModelInterface::add_element()'],['../classotus_1_1StandardModel.html#a5e09a354aff2b48111ed1c7dc7fc23ea',1,'otus::StandardModel::add_element()']]],
-  ['add_5fobserver',['add_observer',['../classotus_1_1Observable.html#ab43d0439f7b04d5b1d4fdd42f740f2e3',1,'otus::Observable']]],
-  ['add_5fonclick_5flistener',['add_onclick_listener',['../classotus_1_1OnClickable.html#a976a2a05c3e622d9228d54bad3dd27a9',1,'otus::OnClickable::add_onclick_listener()'],['../classotus_1_1OnCoordinateClickable.html#a2b907c8fa28b51e1567964870c1ec94f',1,'otus::OnCoordinateClickable::add_onclick_listener()']]]
+  ['endian',['Endian',['../classotus_1_1details_1_1Endian.html',1,'otus::details']]],
+  ['equal_5ftypes',['equal_types',['../structotus_1_1my__traits_1_1equal__types.html',1,'otus::my_traits']]],
+  ['equal_5ftypes_3c_20a_2c_20b_2c_20args_2e_2e_2e_3e',['equal_types&lt; A, B, Args...&gt;',['../structotus_1_1my__traits_1_1equal__types_3_01A_00_01B_00_01Args_8_8_8_4.html',1,'otus::my_traits']]],
+  ['equal_5ftypes_3c_20t_20_3e',['equal_types&lt; T &gt;',['../structotus_1_1my__traits_1_1equal__types_3_01T_01_4.html',1,'otus::my_traits']]]
 ];

@@ -1,7 +1,0 @@
-<map id="otus::OnClickable" name="otus::OnClickable">
-<area shape="rect" id="node2" href="$classotus_1_1ClearButton.html" title="{otus::ClearButton\n||}" alt="" coords="5,175,128,252"/>
-<area shape="rect" id="node3" href="$classotus_1_1ColorButton.html" title="{otus::ColorButton\n||+ ColorButton()\l+ get_tag()\l}" alt="" coords="153,167,276,259"/>
-<area shape="rect" id="node4" href="$classotus_1_1OpenButton.html" title="{otus::OpenButton\n||+ OpenButton()\l+ get_path()\l+ set_path()\l}" alt="" coords="301,160,424,267"/>
-<area shape="rect" id="node5" href="$classotus_1_1SaveButton.html" title="{otus::SaveButton\n||}" alt="" coords="449,175,572,252"/>
-<area shape="rect" id="node6" href="$classotus_1_1ToolButton.html" title="{otus::ToolButton\n||+ ToolButton()\l+ get_tag()\l}" alt="" coords="597,167,715,259"/>
-</map>

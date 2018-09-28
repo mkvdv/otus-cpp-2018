@@ -1,4 +1,0 @@
-<map id="otus::StandardModel" name="otus::StandardModel">
-<area shape="rect" id="node2" href="$classotus_1_1ModelInterface.html" title="{otus::ModelInterface\n||+ get_current_color()\l+ choose_color()\l+ get_current_tool()\l+ choose_tool()\l+ add_element()\l+ delete_element_at()\l+ open()\l+ clear()\l+ save()\l+ get_elements()\l+ ~ModelInterface()\l}" alt="" coords="5,147,152,371"/>
-<area shape="rect" id="node3" href="$classotus_1_1Observable.html" title="{otus::Observable\n||+ add_observer()\l+ notify_update()\l}" alt="" coords="18,6,139,98"/>
-</map>
