@@ -34,7 +34,7 @@ namespace otus {
 					os << '.';
 				}
 
-				if (otus::is_little()) {
+				if constexpr (otus::is_little()) {
 					os << (unsigned int) *(((unsigned char *) &unsigned_val) + (nbytes - i - 1));
 				} else {
 					os << (unsigned int) *(((unsigned char *) &unsigned_val) + i);
@@ -118,5 +118,4 @@ namespace otus {
 	void print_ip(T &&val) {
 		details::convert_to_ipstr(std::forward<T>(val), std::cout);
 	}
-
 } // namespace otus
