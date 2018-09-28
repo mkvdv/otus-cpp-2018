@@ -1,0 +1,23 @@
+language: cpp
+branches:
+  only:
+    - task04_for_review
+before_script:
+  - mkdir build
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - doxygen
+      - graphviz
+script:
+  - doxygen Doxyfile
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - sudo env "PATH=$PATH" cmake --build . --target test
+  - cmake --build . --target package
+
