@@ -1,4 +1,4 @@
-# Task05 - Editor
+# Task06 - Matrix
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task06)](https://travis-ci.com/mkvdv/otus-cpp-2018)
 [ ![Download](https://api.bintray.com/packages/mkvdv/otus06/matrix/images/download.svg) ](https://bintray.com/mkvdv/otus06/matrix/_latestVersion)
 
