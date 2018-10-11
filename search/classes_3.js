@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['geometryelement',['GeometryElement',['../classotus_1_1GeometryElement.html',1,'otus']]]
+  ['dot',['Dot',['../classotus_1_1Dot.html',1,'otus']]]
 ];

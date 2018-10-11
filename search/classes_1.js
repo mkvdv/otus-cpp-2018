@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['canvas',['Canvas',['../classotus_1_1Canvas.html',1,'otus']]],
-  ['clearbutton',['ClearButton',['../classotus_1_1ClearButton.html',1,'otus']]],
-  ['colorbutton',['ColorButton',['../classotus_1_1ColorButton.html',1,'otus']]],
-  ['controllerinterface',['ControllerInterface',['../classotus_1_1ControllerInterface.html',1,'otus']]]
+  ['baselistenable',['BaseListenable',['../classotus_1_1BaseListenable.html',1,'otus']]],
+  ['baseonclickable',['BaseOnClickable',['../classotus_1_1BaseOnClickable.html',1,'otus']]],
+  ['baseonclickable_3c_20args_2e_2e_2e_3e',['BaseOnClickable&lt; Args...&gt;',['../classotus_1_1BaseOnClickable.html',1,'otus']]]
 ];

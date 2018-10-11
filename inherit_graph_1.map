@@ -1,6 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classotus_1_1GeometryElement.html" title="otus::GeometryElement" alt="" coords="5,56,165,83"/>
-<area shape="rect" id="node2" href="$classotus_1_1Dot.html" title="otus::Dot" alt="" coords="233,5,309,32"/>
-<area shape="rect" id="node3" href="$classotus_1_1Line.html" title="otus::Line" alt="" coords="231,56,310,83"/>
-<area shape="rect" id="node4" href="$classotus_1_1Rectangle.html" title="otus::Rectangle" alt="" coords="213,107,328,133"/>
+<area shape="rect" id="node1" href="$classotus_1_1BaseListenable.html" title="otus::BaseListenable\l\&lt; Args \&gt;" alt="" coords="5,5,149,46"/>
+<area shape="rect" id="node2" href="$classotus_1_1ModelInterface.html" title="otus::ModelInterface" alt="" coords="197,12,339,39"/>
+<area shape="rect" id="node3" href="$classotus_1_1StandardModel.html" title="otus::StandardModel" alt="" coords="387,12,530,39"/>
 </map>

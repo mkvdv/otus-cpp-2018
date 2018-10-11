@@ -5,7 +5,7 @@ var searchData=
   ['choose_5ftool',['choose_tool',['../classotus_1_1StandardController.html#a08b3ca1dbac71e5495df1a8deb0fdad5',1,'otus::StandardController::choose_tool()'],['../classotus_1_1ControllerInterface.html#af8d3cc34ffc29157dbda5059f4945cfa',1,'otus::ControllerInterface::choose_tool()'],['../classotus_1_1ModelInterface.html#a1e44a74eb6cd8c245ed73384e9142d72',1,'otus::ModelInterface::choose_tool()'],['../classotus_1_1StandardModel.html#a91e83231146e0f534abd350b00eb001c',1,'otus::StandardModel::choose_tool()']]],
   ['clear',['clear',['../classotus_1_1StandardController.html#a7fd13c77e61b5a6bba99fe55677f77a4',1,'otus::StandardController::clear()'],['../classotus_1_1ControllerInterface.html#aea0370b784754ac949ec3302b89f09bd',1,'otus::ControllerInterface::clear()'],['../classotus_1_1ModelInterface.html#addcffd9a6c895919139bc444daba6817',1,'otus::ModelInterface::clear()'],['../classotus_1_1StandardModel.html#aa8d4744f90b419de18f7290417a73a42',1,'otus::StandardModel::clear()']]],
   ['clearbutton',['ClearButton',['../classotus_1_1ClearButton.html',1,'otus']]],
-  ['click',['click',['../classotus_1_1OnClickable.html#a1d4e4040c5894ec00feb2b921d99f2d8',1,'otus::OnClickable::click()'],['../classotus_1_1OnCoordinateClickable.html#a304f41819330e37bce2c68f0692da2d6',1,'otus::OnCoordinateClickable::click()']]],
+  ['click',['click',['../classotus_1_1BaseOnClickable.html#ad61e8e0b66de6d22d46c91826d019e7c',1,'otus::BaseOnClickable']]],
   ['colorbutton',['ColorButton',['../classotus_1_1ColorButton.html#ae2272967451f1fa5bbd01a63b85e4a36',1,'otus::ColorButton']]],
   ['colorbutton',['ColorButton',['../classotus_1_1ColorButton.html',1,'otus']]],
   ['colortag',['ColorTag',['../namespaceotus.html#a624313aec55ba4ebfc3499a4e7a67cb9',1,'otus']]],

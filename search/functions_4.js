@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['info',['info',['../classotus_1_1utils_1_1Logger.html#a191d3e1ef165647cf910be967158420d',1,'otus::utils::Logger']]]
+  ['info',['info',['../classotus_1_1utils_1_1Logger.html#afdaff192231ea9926078d0b5a682c149',1,'otus::utils::Logger']]]
 ];

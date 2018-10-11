@@ -10,22 +10,21 @@
 <title>otus::ModelInterface</title>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="-0.5,-194.5 -0.5,-361.5 110.5,-361.5 110.5,-194.5 -0.5,-194.5"/>
-<text text-anchor="middle" x="55" y="-349.5" font-family="Helvetica,sans-Serif" font-size="10.00">otus::ModelInterface</text>
-<polyline fill="none" stroke="black" points="-0.5,-342.5 110.5,-342.5 "/>
-<text text-anchor="middle" x="55" y="-330.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="-0.5,-323.5 110.5,-323.5 "/>
-<text text-anchor="start" x="7.5" y="-311.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_current_color()</text>
-<text text-anchor="start" x="7.5" y="-300.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ choose_color()</text>
-<text text-anchor="start" x="7.5" y="-289.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_current_tool()</text>
-<text text-anchor="start" x="7.5" y="-278.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ choose_tool()</text>
-<text text-anchor="start" x="7.5" y="-267.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ add_element()</text>
-<text text-anchor="start" x="7.5" y="-256.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ delete_element_at()</text>
-<text text-anchor="start" x="7.5" y="-245.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ open()</text>
-<text text-anchor="start" x="7.5" y="-234.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ clear()</text>
-<text text-anchor="start" x="7.5" y="-223.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ save()</text>
-<text text-anchor="start" x="7.5" y="-212.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_elements()</text>
-<text text-anchor="start" x="7.5" y="-201.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~ModelInterface()</text>
+<polygon fill="#bfbfbf" stroke="black" points="-0.5,-195 -0.5,-351 110.5,-351 110.5,-195 -0.5,-195"/>
+<text text-anchor="middle" x="55" y="-339" font-family="Helvetica,sans-Serif" font-size="10.00">otus::ModelInterface</text>
+<polyline fill="none" stroke="black" points="-0.5,-332 110.5,-332 "/>
+<text text-anchor="middle" x="55" y="-320" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="-0.5,-313 110.5,-313 "/>
+<text text-anchor="start" x="7.5" y="-301" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_current_color()</text>
+<text text-anchor="start" x="7.5" y="-290" font-family="Helvetica,sans-Serif" font-size="10.00">+ choose_color()</text>
+<text text-anchor="start" x="7.5" y="-279" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_current_tool()</text>
+<text text-anchor="start" x="7.5" y="-268" font-family="Helvetica,sans-Serif" font-size="10.00">+ choose_tool()</text>
+<text text-anchor="start" x="7.5" y="-257" font-family="Helvetica,sans-Serif" font-size="10.00">+ add_element()</text>
+<text text-anchor="start" x="7.5" y="-246" font-family="Helvetica,sans-Serif" font-size="10.00">+ delete_element_at()</text>
+<text text-anchor="start" x="7.5" y="-235" font-family="Helvetica,sans-Serif" font-size="10.00">+ open()</text>
+<text text-anchor="start" x="7.5" y="-224" font-family="Helvetica,sans-Serif" font-size="10.00">+ clear()</text>
+<text text-anchor="start" x="7.5" y="-213" font-family="Helvetica,sans-Serif" font-size="10.00">+ save()</text>
+<text text-anchor="start" x="7.5" y="-202" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_elements()</text>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
@@ -50,26 +49,27 @@
 </g>
 <!-- Node1&#45;&gt;Node3 -->
 <g id="edge2" class="edge"><title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M55,-184.145C55,-175.103 55,-165.997 55,-157.134"/>
-<polygon fill="none" stroke="midnightblue" points="51.5001,-184.31 55,-194.311 58.5001,-184.311 51.5001,-184.31"/>
+<path fill="none" stroke="midnightblue" d="M55,-184.485C55,-175.35 55,-166.112 55,-157.106"/>
+<polygon fill="none" stroke="midnightblue" points="51.5001,-184.736 55,-194.736 58.5001,-184.736 51.5001,-184.736"/>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<g id="a_node2"><a xlink:href="classotus_1_1Observable.html" target="_top" xlink:title="{otus::Observable\n||+ add_observer()\l+ notify_update()\l}">
-<polygon fill="none" stroke="black" points="9.5,-399 9.5,-467 100.5,-467 100.5,-399 9.5,-399"/>
-<text text-anchor="middle" x="55" y="-455" font-family="Helvetica,sans-Serif" font-size="10.00">otus::Observable</text>
-<polyline fill="none" stroke="black" points="9.5,-448 100.5,-448 "/>
-<text text-anchor="middle" x="55" y="-436" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="9.5,-429 100.5,-429 "/>
-<text text-anchor="start" x="17.5" y="-417" font-family="Helvetica,sans-Serif" font-size="10.00">+ add_observer()</text>
-<text text-anchor="start" x="17.5" y="-406" font-family="Helvetica,sans-Serif" font-size="10.00">+ notify_update()</text>
+<g id="a_node2"><a xlink:href="classotus_1_1BaseListenable.html" target="_top" xlink:title="{Listenable\n||+ add_listener()\l+ notify_update()\l+ ~BaseListenable()\l}">
+<polygon fill="none" stroke="black" points="3,-388.5 3,-467.5 107,-467.5 107,-388.5 3,-388.5"/>
+<text text-anchor="middle" x="55" y="-455.5" font-family="Helvetica,sans-Serif" font-size="10.00">Listenable</text>
+<polyline fill="none" stroke="black" points="3,-448.5 107,-448.5 "/>
+<text text-anchor="middle" x="55" y="-436.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="3,-429.5 107,-429.5 "/>
+<text text-anchor="start" x="11" y="-417.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ add_listener()</text>
+<text text-anchor="start" x="11" y="-406.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ notify_update()</text>
+<text text-anchor="start" x="11" y="-395.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~BaseListenable()</text>
 </a>
 </g>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge1" class="edge"><title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M55,-388.783C55,-380.261 55,-371.055 55,-361.724"/>
-<polygon fill="none" stroke="midnightblue" points="51.5001,-388.801 55,-398.801 58.5001,-388.801 51.5001,-388.801"/>
+<path fill="none" stroke="midnightblue" d="M55,-378.147C55,-369.497 55,-360.302 55,-351.095"/>
+<polygon fill="none" stroke="midnightblue" points="51.5001,-378.392 55,-388.392 58.5001,-378.392 51.5001,-378.392"/>
 </g>
 </g>
 </svg>

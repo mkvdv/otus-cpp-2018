@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['notify_5fupdate',['notify_update',['../classotus_1_1Observable.html#a7b813f7307bf7fb9effc737b6c0f17a6',1,'otus::Observable']]]
+  ['notify_5fupdate',['notify_update',['../classotus_1_1BaseListenable.html#af627147e8bd624213ca70826e0b4a395',1,'otus::BaseListenable']]]
 ];

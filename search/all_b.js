@@ -6,9 +6,9 @@ var searchData=
   ['set_5fpath',['set_path',['../classotus_1_1OpenButton.html#afd398f051155995e31ff10a21e96ae5c',1,'otus::OpenButton']]],
   ['simple_5ftest',['simple_test',['../classotus_1_1TesterFriendClass.html#a796999027f5ab89cae34367eea16055b',1,'otus::TesterFriendClass']]],
   ['standardcontroller',['StandardController',['../classotus_1_1StandardController.html',1,'otus']]],
-  ['standardcontroller',['StandardController',['../classotus_1_1StandardController.html#ae1c8dcd25dac8c652179792c0114a530',1,'otus::StandardController']]],
+  ['standardcontroller',['StandardController',['../classotus_1_1StandardController.html#a8b891a77dd335858921415d567de8eab',1,'otus::StandardController']]],
   ['standardgeometryfactory',['StandardGeometryFactory',['../classotus_1_1StandardGeometryFactory.html',1,'otus']]],
   ['standardmodel',['StandardModel',['../classotus_1_1StandardModel.html',1,'otus']]],
-  ['standardview',['StandardView',['../classotus_1_1StandardView.html#aef874fd3e4a30c7f0d956eec110a140a',1,'otus::StandardView']]],
+  ['standardview',['StandardView',['../classotus_1_1StandardView.html#a94a7529053d9482b8a3e5faf84e7d52c',1,'otus::StandardView']]],
   ['standardview',['StandardView',['../classotus_1_1StandardView.html',1,'otus']]]
 ];

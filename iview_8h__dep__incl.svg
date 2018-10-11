@@ -10,8 +10,8 @@
 <title>src/view/iview.h</title>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="141.5,-112.5 141.5,-131.5 228.5,-131.5 228.5,-112.5 141.5,-112.5"/>
-<text text-anchor="middle" x="185" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/view/iview.h</text>
+<polygon fill="#bfbfbf" stroke="black" points="79.5,-112.5 79.5,-131.5 166.5,-131.5 166.5,-112.5 79.5,-112.5"/>
+<text text-anchor="middle" x="123" y="-119.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/view/iview.h</text>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
@@ -23,8 +23,8 @@
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge1" class="edge"><title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M156.227,-108.368C133.193,-98.2553 101.516,-84.3486 81.3985,-75.5164"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="154.947,-111.628 165.51,-112.444 157.761,-105.219 154.947,-111.628"/>
+<path fill="none" stroke="midnightblue" d="M105.533,-105.537C94.6562,-95.9087 81.0561,-83.8694 71.979,-75.8339"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="103.392,-108.316 113.199,-112.324 108.032,-103.075 103.392,-108.316"/>
 </g>
 <!-- Node5 -->
 <g id="node5" class="node"><title>Node5</title>
@@ -36,21 +36,8 @@
 </g>
 <!-- Node1&#45;&gt;Node5 -->
 <g id="edge4" class="edge"><title>Node1&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M185,-101.805C185,-92.9102 185,-82.7798 185,-75.7511"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="181.5,-102.083 185,-112.083 188.5,-102.083 181.5,-102.083"/>
-</g>
-<!-- Node7 -->
-<g id="node7" class="node"><title>Node7</title>
-<g id="a_node7"><a xlink:href="iview_8cpp.html" target="_top" xlink:title="File with implementation of interface of abstract view (V from MVC). ">
-<polygon fill="none" stroke="black" points="246,-56.5 246,-75.5 344,-75.5 344,-56.5 246,-56.5"/>
-<text text-anchor="middle" x="295" y="-63.5" font-family="Helvetica,sans-Serif" font-size="10.00">src/view/iview.cpp</text>
-</a>
-</g>
-</g>
-<!-- Node1&#45;&gt;Node7 -->
-<g id="edge8" class="edge"><title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M211.762,-107.862C232.159,-97.8492 259.666,-84.3458 277.37,-75.6545"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="210.108,-104.775 202.673,-112.324 213.192,-111.059 210.108,-104.775"/>
+<path fill="none" stroke="midnightblue" d="M140.754,-105.537C151.808,-95.9087 165.631,-83.8694 174.857,-75.8339"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="138.203,-103.117 132.961,-112.324 142.801,-108.395 138.203,-103.117"/>
 </g>
 <!-- Node3 -->
 <g id="node3" class="node"><title>Node3</title>
