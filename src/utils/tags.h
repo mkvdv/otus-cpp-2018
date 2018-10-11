@@ -7,7 +7,6 @@
 #pragma once
 
 namespace otus {
-	// вот ты новый клас добавишь, а tag забудешь добавить - и что делать? ааа, баги, плохо
 	enum ToolTag {
 	  LINE, RECTANGLE, DOT, DELETER
 	};

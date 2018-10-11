@@ -17,16 +17,17 @@ namespace otus {
 	 * - получет в конструкторе ребят, на которых подписывает клики своего содержимого.
 	 * - умеет перерисовываться полностью
 	 */
-	class StandardView : public ViewInterface {
+	class StandardView: public ViewInterface {
 	public:
-		StandardView(ModelInterface* model, ControllerInterface* controller);
+		StandardView(std::shared_ptr<ModelInterface> model,
+		             std::shared_ptr<ControllerInterface> controller);
 		void redraw() override;
 
 		// tester is your friend
 		friend class TesterFriendClass;
 
 	private:
-		ModelInterface* model_;
+		std::shared_ptr<ModelInterface> model_;
 
 		// view elements
 		OpenButton open_btn_{""};

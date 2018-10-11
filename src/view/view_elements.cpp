@@ -23,7 +23,7 @@ namespace otus {
 
 	OpenButton::OpenButton(std::string s)
 			:path_(std::move(s)) { }
-	std::string OpenButton::get_path()
+	std::string OpenButton::get_path() const
 	{
 		return path_;
 	}

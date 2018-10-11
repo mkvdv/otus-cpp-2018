@@ -7,7 +7,16 @@ else()
 endif()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-add_executable(editor src/main.cpp src/utils/geomfactory.cpp src/model/model.cpp src/controller/controller.cpp src/utils/observe.cpp src/view/view.cpp src/view/geometry_elements.cpp src/utils/onclick.cpp src/view/view_elements.cpp src/tester.cpp  src/utils/logger.cpp src/view/iview.cpp)
+add_executable(editor 	src/main.cpp
+				        src/utils/geomfactory.cpp
+				        src/model/model.cpp
+				        src/controller/controller.cpp
+				        src/view/view.cpp
+				        src/view/geometry_elements.cpp
+				        src/view/view_elements.cpp
+				        src/tester.cpp
+				        src/utils/logger.cpp
+    )
 
 macro(set_warning_flags target)
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")

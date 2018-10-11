@@ -12,12 +12,10 @@ This class is friend for many other classes, so it can test private field of his
 #include "controller/controller.h"
 
 #include <iostream>
-#include <cassert>
 
 namespace otus {
 	namespace {
-		void print_nl()
-		{
+		void print_nl() {
 			std::cout << '\n';
 		}
 	} // anonymous namespace
@@ -25,46 +23,49 @@ namespace otus {
 	/**
 	 * Simulate simple scenario of using editor.
 	 */
-	void TesterFriendClass::simple_test()
-	{
-		otus::StandardModel model;
-		otus::StandardController controller(&model);
-		otus::StandardView* view = dynamic_cast<otus::StandardView*>(controller.view_.get());
-		assert(view);
+	void TesterFriendClass::simple_test() {
+		using namespace std;
+
+		shared_ptr<otus::ModelInterface> model_ptr = make_shared<otus::StandardModel>();
+		shared_ptr<otus::ControllerInterface>
+			controller_ptr = make_shared<otus::StandardController>(model_ptr);
+		shared_ptr<otus::StandardView>
+			view_ptr = make_shared<otus::StandardView>(model_ptr, controller_ptr);
+
 
 		// open some file
-		view->open_btn_.set_path("my_super_druper_file.ep");
-		view->open_btn_.click();
+		view_ptr->open_btn_.set_path("my_super_druper_file.ep");
+		view_ptr->open_btn_.click();
 		print_nl();
 
 		// add dot
-		view->dot_tool_btn_.click();
-		view->canvas_.click(1, 1);
+		view_ptr->dot_tool_btn_.click();
+		view_ptr->canvas_.click(1, 1);
 		print_nl();
 
 		// add line
-		view->line_tool_btn_.click();
-		view->canvas_.click(2, 2);
+		view_ptr->line_tool_btn_.click();
+		view_ptr->canvas_.click(2, 2);
 		print_nl();
 
 		// add rectangle
-		view->rect_tool_btn_.click();
-		view->canvas_.click(3, 3);
+		view_ptr->rect_tool_btn_.click();
+		view_ptr->canvas_.click(3, 3);
 		print_nl();
 
 		// save
-		view->save_btn_.click();
+		view_ptr->save_btn_.click();
 		print_nl();
 
 		// delete line
-		view->deleter_tool_btn_.click();
-		view->canvas_.click(2, 2);
+		view_ptr->deleter_tool_btn_.click();
+		view_ptr->canvas_.click(2, 2);
 
 		// save
-		view->save_btn_.click();
+		view_ptr->save_btn_.click();
 		print_nl();
 		// clear all
-		view->clear_btn_.click();
+		view_ptr->clear_btn_.click();
 		print_nl();
 	}
 } // namespace otus

@@ -12,15 +12,17 @@
 #include <string>
 
 namespace otus {
-	class ToolButton : public OnClickable {
+	class ToolButton: public OnClickable {
 	public:
 		explicit ToolButton(ToolTag tag);
 		ToolTag get_tag() const;
+
+		~ToolButton() override = default;
 	private:
 		const ToolTag tag_;
 	};
 
-	class ColorButton : public OnClickable {
+	class ColorButton: public OnClickable {
 	public:
 		explicit ColorButton(ColorTag tag);
 		ColorTag get_tag() const;
@@ -28,19 +30,19 @@ namespace otus {
 		const ColorTag tag_;
 	};
 
-	class OpenButton : public OnClickable {
+	class OpenButton: public OnClickable {
 	public:
 		explicit OpenButton(std::string s);
-		std::string get_path();
-		void set_path(const std::string& s);
+		std::string get_path() const;
+		void set_path(const std::string &s);
 	private:
 		std::string path_;
 	};
 
-	class SaveButton : public OnClickable { };
+	class SaveButton: public OnClickable {};
 
-	class ClearButton : public OnClickable { };
+	class ClearButton: public OnClickable {};
 
-	class Canvas : public OnCoordinateClickable { };
+	class Canvas: public OnCoordinateClickable {};
 
 } // namespace otus::utils

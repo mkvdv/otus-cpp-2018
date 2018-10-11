@@ -6,20 +6,29 @@
 #pragma once
 
 #include <list>
+#include <functional>
+#include "onclick.h"
 
 namespace otus {
-	class Observer {
+	/**
+	 * Adapter for BaseOnClickable
+	 * just give u other names for methods
+	 * @tparam Args
+	 */
+	template<class ... Args>
+	class BaseListenable {
 	public:
-		virtual void response() = 0; // отреагировать
-		virtual ~Observer() = default;
-	};
+		void add_listener(std::function<void(const Args &...)> &&observer) {
+			on_clickable_.add_onclick_listener(std::move(observer));
+		}
+		void notify_update(const Args &...args) {
+			on_clickable_.click(args...);
+		}
+		virtual ~BaseListenable() = default;
 
-
-	class Observable {
-	public:
-		void add_observer(Observer* observer);
-		void notify_update();
 	private:
-		std::list<Observer*> observers_;
+		BaseOnClickable<Args...> on_clickable_;
 	};
+
+	using Listenable = BaseListenable<>;
 } // namespace otus

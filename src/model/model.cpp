@@ -26,7 +26,7 @@ namespace otus {
 
 	void StandardModel::delete_element_at(int x, int y)
 	{
-		// delete one LAST added element with (x, y) coordinates
+		// delete one LAST added element with (x_, y) coordinates
 		for (auto it = drawed_elements_.rbegin(); it!=drawed_elements_.rend(); ++it) {
 			if ((*it)->getX()==x && (*it)->getY()==y) {
 				drawed_elements_.erase(it.base());
@@ -68,7 +68,7 @@ namespace otus {
 			/**
 			 * Save all model state to filepath
 			 */
-			logger_.info("saved");
+			logger_.info(std::string("saved saved to ") + current_image_path_);
 		}
 		else {
 			throw std::runtime_error("Can't save, path is empty");

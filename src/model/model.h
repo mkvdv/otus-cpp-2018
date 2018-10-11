@@ -14,7 +14,7 @@ namespace otus {
 	 * - её могут читать View и Controller, если надо
 	 * - Controller может её менять
 	 */
-	class StandardModel : public ModelInterface {
+	class StandardModel: public ModelInterface {
 	public:
 		/**
 		 * Change current tool tag to passed tag.
@@ -28,7 +28,7 @@ namespace otus {
 		 */
 		void choose_color(ColorTag color_tag) override;
 
-		void add_element(std::unique_ptr<GeometryElement>&& elem) override;
+		void add_element(std::unique_ptr<GeometryElement> &&elem) override;
 
 		/**
 		 * Dymmy delete function. Remove last added element at this coordinates.
@@ -36,7 +36,7 @@ namespace otus {
 		 */
 		void delete_element_at(int x, int y) override;
 
-		void open(const std::string& newfile_path) override;
+		void open(const std::string &newfile_path) override;
 
 		/**
 		 * Clear model state.
@@ -52,7 +52,7 @@ namespace otus {
 		 * Getter for inner list of pointers to geometry_element.
 		 * @return const refernce to private member - list of geometry elements
 		 */
-		const std::list<std::unique_ptr<GeometryElement>>& get_elements() const override;
+		const std::list<std::unique_ptr<GeometryElement>> &get_elements() const override;
 
 		ToolTag get_current_tool() const override;
 
@@ -65,7 +65,11 @@ namespace otus {
 		std::string current_image_path_;
 		int current_tool_tag_ = ToolTag::DOT;
 		int current_color_tag_ = ColorTag::RED;
-		std::list<std::unique_ptr<GeometryElement>> drawed_elements_; // drawed on canvas
+
+		// store elements, drawed on canvas
+		// shared_ptr, cause we can show it
+		std::list<std::unique_ptr<GeometryElement>> drawed_elements_;
+
 		utils::Logger logger_{"Model"};
 	};
 } // namespace otus

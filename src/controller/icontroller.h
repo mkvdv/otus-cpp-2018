@@ -15,16 +15,18 @@ namespace otus {
 	/**
 	 * todo inherit fields from 2 classes - oh no, dangerous, fix this shit ?
 	 */
-	class ControllerInterface : public OnClickListener, public OnCoordinateClickListener {
+	class ControllerInterface {
 	public:
-		virtual void open_file(const std::string& newfile_path) = 0;
+		virtual void open_file(const std::string &newfile_path) = 0;
 		virtual void save_file() = 0;
 		virtual void clear() = 0;
 
 		virtual void choose_tool(ToolTag tag) = 0;
 		virtual void choose_color(ColorTag tag) = 0;
 
-		~ControllerInterface() override = default;
+		virtual void react_canvas_click(int x, int y) = 0;
+
+		virtual ~ControllerInterface() = default;
 	};
 
 } // namespace otus

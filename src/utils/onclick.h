@@ -10,41 +10,39 @@
 #pragma once
 
 #include <list>
+#include <functional>
 
 namespace otus {
-	class OnClickable; // forward decl
-	class OnClickListener {
+	template<class ...Args>
+	class BaseOnClickable {
 	public:
-		virtual void on_click(OnClickable* ptr) = 0;
-		virtual ~OnClickListener() = default;
+		void add_onclick_listener(std::function<void(const Args &...)> listener);
+		void click(const Args &...);
+
+		virtual ~BaseOnClickable<Args...>() = default;
+	private:
+		std::list<std::function<void(const Args &...)>> onclick_listeners_;
 	};
 
-	class OnClickable {
-	public:
-		void add_onclick_listener(OnClickListener* listener);
-		void click();
-		virtual ~OnClickable() = default;
-	private:
-		std::list<OnClickListener*> onclick_listeners_;
-	};
+	template<class... Args>
+	void BaseOnClickable<Args...>::add_onclick_listener(std::function<void(const Args &...)> listener) {
+		onclick_listeners_.push_back(std::move(listener));
+	}
+
+	template<class... Args>
+	void BaseOnClickable<Args...>::click(const Args &...args) {
+		for (auto &listener: onclick_listeners_) {
+			listener(args...);
+		}
+	}
+
+	/**
+	 * Aliases for classes.
+	 */
+	using OnClickable = BaseOnClickable<>;
+	using OnCoordinateClickable = BaseOnClickable<int, int>;
+
 } // namespace otus
 
 
-namespace otus {
-	class OnCoordinateClickable; // forward decl
-	class OnCoordinateClickListener {
-	public:
-		virtual void on_click(OnCoordinateClickable* ptr, int x, int y) = 0;
-		virtual ~OnCoordinateClickListener() = default;
-	};
-
-	class OnCoordinateClickable {
-	public:
-		void add_onclick_listener(OnCoordinateClickListener* listener);
-		void click(int x, int y);
-		virtual ~OnCoordinateClickable() = default;
-	private:
-		std::list<OnCoordinateClickListener*> on_coordinate_click_listeners_;
-	};
-} // namespace otus
 

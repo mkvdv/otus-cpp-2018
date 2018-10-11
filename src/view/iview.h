@@ -8,9 +8,8 @@
 #include "../utils/observe.h"
 
 namespace otus {
-	class ViewInterface : public Observer {
+	class ViewInterface {
 	public:
 		virtual void redraw() = 0;
-		void response() override;
 	};
 } // namespace otus
