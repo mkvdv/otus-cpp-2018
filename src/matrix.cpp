@@ -1,5 +1,7 @@
 #include "matrix.h"
 
+#include <iostream>
+
 namespace {
 	void matrix() {
 		using T = int;

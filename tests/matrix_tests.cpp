@@ -107,7 +107,7 @@ TEST(GtestSuiteMatrix, iteration1) {
 	ASSERT_EQ(counter, 0);
 }
 
-TEST(GtestSuiteMatrix, iteration2) {
+TEST(GtestSuiteMatrix, iteration_order_checking) {
 	otus::Matrix<T, DEFAULT_VALUE> matrix;
 
 	for (size_t i = 0; i != 10; ++i) {
@@ -119,15 +119,20 @@ TEST(GtestSuiteMatrix, iteration2) {
 
 	size_t prev_ix1 = 0;
 	size_t prev_ix2 = 0;
+	int prev_val = 0;
 
 	for (std::tuple<size_t, size_t, int> tpl: matrix) {
-		size_t &ix1 = std::get<0>(tpl);
-		size_t &ix2 = std::get<1>(tpl);
-
+		size_t ix1;
+		size_t ix2;
+		int val;
+		std::tie(ix1, ix2, val) = tpl;
 
 		ASSERT_EQ(std::get<2>(tpl), 10 * ix1 + (ix2 - ix1));
 		ASSERT_LE(ix1, ix2);
 		ASSERT_LE(prev_ix1, ix1);
 		ASSERT_TRUE(prev_ix2 <= ix2 || (prev_ix2 > ix2 && ix1 > prev_ix1));
+
+		ASSERT_LE(std::tie(prev_ix1, prev_ix2, prev_val), std::tie(ix1, ix2, val));
+		std::tie(prev_ix1, prev_ix2, prev_val) = std::tie(ix1, ix2, val);
 	}
 }

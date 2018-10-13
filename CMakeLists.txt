@@ -21,7 +21,10 @@ add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
 add_executable(matrix src/matrix.cpp)
-add_executable(unit_tests tests/alltests_runner.cpp tests/matrix_tests.cpp)
+add_executable(matrix_n src/matrix_n.cpp)
+add_executable(unit_tests tests/alltests_runner.cpp 
+							tests/matrix_tests.cpp
+							tests/matrix_n_tests.cpp)
 
 macro(set_warning_flags target)
 	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
@@ -41,6 +44,7 @@ macro(set_warning_flags target)
 endmacro()
 
 set_warning_flags(matrix)
+set_warning_flags(matrix_n)
 set_warning_flags(unit_tests)
 
 target_link_libraries(unit_tests
