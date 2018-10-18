@@ -1,0 +1,26 @@
+language: cpp
+branches:
+  only:
+    - task07
+before_script:
+  - mkdir build
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+script:
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - sudo env "PATH=$PATH" cmake --build . --target test
+  - cmake --build . --target package
+deploy:
+  - provider: script
+    skip_cleanup: true
+    on:
+        branch: task07
+    script:
+    - curl -T bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus07/bulk/0.0.$TRAVIS_BUILD_NUMBER/bulk-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
