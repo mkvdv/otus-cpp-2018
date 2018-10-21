@@ -63,6 +63,21 @@ TEST_F(SmokeTestBulk, cmd5) {
 	ASSERT_EQ(output->str(), expected->str());
 }
 
+TEST_F(SmokeTestBulk, one_more_block_test) {
+	*input << "cmd1\n"
+	          "cmd2\n"
+	          "{\n"
+	          "cmd3\n"
+	          "cmd4\n"
+	          "}\n"
+	          "cmd5\n"
+	          "cmd6\n";
+	*expected << "\t| bulk: cmd1, cmd2\n" << "\t| bulk: cmd3, cmd4\n" << "\t| bulk: cmd5, cmd6\n";
+	controller->start();
+
+	ASSERT_EQ(output->str(), expected->str());
+}
+
 TEST_F(SmokeTestBulk, cmd7b) {
 	*input << "cmd1\n"
 	          "cmd2\n"
@@ -72,7 +87,7 @@ TEST_F(SmokeTestBulk, cmd7b) {
 	          "cmd5\n"
 	          "cmd6\n"
 	          "cmd7\n"
-	          "}";
+	          "}\n";
 	*expected << "\t| bulk: cmd1, cmd2, cmd3\n" << "\t| bulk: cmd4, cmd5, cmd6, cmd7\n";
 	controller->start();
 
@@ -89,7 +104,7 @@ TEST_F(SmokeTestBulk, cmd_inner_block) {
 	          "}\n"
 	          "cmd5\n"
 	          "cmd6\n"
-	          "}";
+	          "}\n";
 	*expected << "\t| bulk: cmd1, cmd2, cmd3, cmd4, cmd5, cmd6\n";
 	controller->start();
 
@@ -104,8 +119,7 @@ TEST_F(SmokeTestBulk, cmd_unclosed_block) {
 	          "cmd4\n"
 	          "cmd5\n"
 	          "cmd6\n"
-	          "cmd7\n"
-	          "";
+	          "cmd7\n";
 	*expected << "\t| bulk: cmd1, cmd2, cmd3\n";
 	controller->start();
 

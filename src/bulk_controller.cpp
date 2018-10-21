@@ -55,6 +55,9 @@ namespace otus {
 					throw std::runtime_error("invalid closed block without opened ones");
 				} else {
 					depth_ -= 1;
+					if (depth_ == 0) {
+						run_all_commands();
+					}
 				}
 			} else {
 				pool_->add_command(std::make_unique<SimpleCommand>(s));
