@@ -78,6 +78,20 @@ TEST_F(SmokeTestBulk, one_more_block_test) {
 	ASSERT_EQ(output->str(), expected->str());
 }
 
+TEST_F(SmokeTestBulk, one_block_test) {
+	*input << "{\n"
+	          "cmd1\n"
+	          "cmd2\n"
+	          "cmd3\n"
+	          "cmd4\n"
+	          "}\n";
+
+	*expected << "\t| bulk: cmd1, cmd2, cmd3, cmd4\n";
+	controller->start();
+
+	ASSERT_EQ(output->str(), expected->str());
+}
+
 TEST_F(SmokeTestBulk, cmd7b) {
 	*input << "cmd1\n"
 	          "cmd2\n"
