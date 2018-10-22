@@ -16,8 +16,6 @@ namespace otus {
 	public:
 		explicit ToolButton(ToolTag tag);
 		ToolTag get_tag() const;
-
-		~ToolButton() override = default;
 	private:
 		const ToolTag tag_;
 	};
