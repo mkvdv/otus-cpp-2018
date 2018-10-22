@@ -4,6 +4,5 @@ var searchData=
   ['_7ebaselistenable',['~BaseListenable',['../classotus_1_1BaseListenable.html#ab58c57a8727929ed47a22cc2be146d08',1,'otus::BaseListenable']]],
   ['_7ebaseonclickable',['~BaseOnClickable',['../classotus_1_1BaseOnClickable.html#a60a2edb0184007767f9d54811e616f03',1,'otus::BaseOnClickable']]],
   ['_7econtrollerinterface',['~ControllerInterface',['../classotus_1_1ControllerInterface.html#af6f029bcf57cf1ac4a6a545c20e231f9',1,'otus::ControllerInterface']]],
-  ['_7egeometryelement',['~GeometryElement',['../classotus_1_1GeometryElement.html#a91141d2fa54de40e26656d25121838d8',1,'otus::GeometryElement']]],
-  ['_7etoolbutton',['~ToolButton',['../classotus_1_1ToolButton.html#a5c30ebadafdc272effab4f03a3d036d2',1,'otus::ToolButton']]]
+  ['_7egeometryelement',['~GeometryElement',['../classotus_1_1GeometryElement.html#a91141d2fa54de40e26656d25121838d8',1,'otus::GeometryElement']]]
 ];

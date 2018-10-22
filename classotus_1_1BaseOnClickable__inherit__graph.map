@@ -4,6 +4,6 @@
 <area shape="rect" id="node4" href="$classotus_1_1ColorButton.html" title="{otus::ColorButton\&lt;\&gt;\n||+ ColorButton()\l+ get_tag()\l}" alt="" coords="325,207,464,299"/>
 <area shape="rect" id="node5" href="$classotus_1_1OpenButton.html" title="{otus::OpenButton\&lt;\&gt;\n||+ OpenButton()\l+ get_path()\l+ set_path()\l}" alt="" coords="489,200,628,307"/>
 <area shape="rect" id="node6" href="$classotus_1_1SaveButton.html" title="{otus::SaveButton\&lt;\&gt;\n||}" alt="" coords="653,215,792,292"/>
-<area shape="rect" id="node7" href="$classotus_1_1ToolButton.html" title="{otus::ToolButton\&lt;\&gt;\n||+ ToolButton()\l+ get_tag()\l+ ~ToolButton()\l}" alt="" coords="817,200,951,307"/>
+<area shape="rect" id="node7" href="$classotus_1_1ToolButton.html" title="{otus::ToolButton\&lt;\&gt;\n||+ ToolButton()\l+ get_tag()\l}" alt="" coords="817,207,951,299"/>
 <area shape="rect" id="node8" href="$classotus_1_1BaseOnClickable.html" title="{otus::BaseOnClickable\l\&lt; Args...\&gt;\n||+ add_onclick_listener()\l+ click()\l+ ~BaseOnClickable()\l}" alt="" coords="976,193,1135,314"/>
 </map>

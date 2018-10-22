@@ -111,21 +111,20 @@
 </g>
 <!-- Node7 -->
 <g id="node7" class="node"><title>Node7</title>
-<g id="a_node7"><a xlink:href="classotus_1_1ToolButton.html" target="_top" xlink:title="{otus::ToolButton\&lt;\&gt;\n||+ ToolButton()\l+ get_tag()\l+ ~ToolButton()\l}">
-<polygon fill="none" stroke="black" points="608.5,-6.5 608.5,-85.5 709.5,-85.5 709.5,-6.5 608.5,-6.5"/>
-<text text-anchor="middle" x="659" y="-73.5" font-family="Helvetica,sans-Serif" font-size="10.00">otus::ToolButton&lt;&gt;</text>
-<polyline fill="none" stroke="black" points="608.5,-66.5 709.5,-66.5 "/>
-<text text-anchor="middle" x="659" y="-54.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polyline fill="none" stroke="black" points="608.5,-47.5 709.5,-47.5 "/>
-<text text-anchor="start" x="616.5" y="-35.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ToolButton()</text>
-<text text-anchor="start" x="616.5" y="-24.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_tag()</text>
-<text text-anchor="start" x="616.5" y="-13.5" font-family="Helvetica,sans-Serif" font-size="10.00">+ ~ToolButton()</text>
+<g id="a_node7"><a xlink:href="classotus_1_1ToolButton.html" target="_top" xlink:title="{otus::ToolButton\&lt;\&gt;\n||+ ToolButton()\l+ get_tag()\l}">
+<polygon fill="none" stroke="black" points="608.5,-12 608.5,-80 709.5,-80 709.5,-12 608.5,-12"/>
+<text text-anchor="middle" x="659" y="-68" font-family="Helvetica,sans-Serif" font-size="10.00">otus::ToolButton&lt;&gt;</text>
+<polyline fill="none" stroke="black" points="608.5,-61 709.5,-61 "/>
+<text text-anchor="middle" x="659" y="-49" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polyline fill="none" stroke="black" points="608.5,-42 709.5,-42 "/>
+<text text-anchor="start" x="616.5" y="-30" font-family="Helvetica,sans-Serif" font-size="10.00">+ ToolButton()</text>
+<text text-anchor="start" x="616.5" y="-19" font-family="Helvetica,sans-Serif" font-size="10.00">+ get_tag()</text>
 </a>
 </g>
 </g>
 <!-- Node1&#45;&gt;Node7 -->
 <g id="edge6" class="edge"><title>Node1&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M484.498,-153.439C519.621,-136.603 562.435,-114.708 599,-92 602.208,-90.0079 605.459,-87.8896 608.702,-85.6993"/>
+<path fill="none" stroke="midnightblue" d="M484.498,-153.439C519.621,-136.603 562.435,-114.708 599,-92 604.862,-88.3592 610.869,-84.2971 616.709,-80.1442"/>
 <polygon fill="none" stroke="midnightblue" points="482.801,-150.37 475.276,-157.828 485.809,-156.691 482.801,-150.37"/>
 </g>
 <!-- Node8 -->
