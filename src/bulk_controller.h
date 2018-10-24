@@ -14,7 +14,7 @@ namespace otus {
 	 * - IFileLogger - write bulk of commands in special .log files
 	 * - IBulkLogger - write the same bulks to output and also it can write input data in pretty way
 	 */
-	class BulkController: public Listener<std::string> {
+	class BulkController: public Listener<std::string>, std::enable_shared_from_this<BulkController> {
 	public:
 		/**
 		 *

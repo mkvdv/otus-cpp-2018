@@ -19,13 +19,13 @@ int main(int argc, char *argv[]) {
 	std::unique_ptr<otus::IBulkLogger> bulk_logger = std::make_unique<otus::BulkLogger>(std::cout);
 	std::unique_ptr<otus::ICommandPool> command_pool = std::make_unique<otus::CommandPool>();;
 
-	otus::BulkController controller(commands_per_block,
-	                                std::move(file_logger),
-	                                std::move(reader),
-	                                std::move(bulk_logger),
-	                                std::move(command_pool),
-	                                PRINT_INPUT);
-	controller.start();
+	auto controller = std::make_shared<otus::BulkController>(commands_per_block,
+	                                                         std::move(file_logger),
+	                                                         std::move(reader),
+	                                                         std::move(bulk_logger),
+	                                                         std::move(command_pool),
+	                                                         PRINT_INPUT);
+	controller->start();
 
 	return EXIT_SUCCESS;
 }

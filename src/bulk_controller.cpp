@@ -14,7 +14,7 @@ namespace otus {
 		  bulk_logger_(std::move(bulk_logger)),
 		  pool_(std::move(command_pool)),
 		  print_input_enabled_(print_input_enabled) {
-		reader_->add_listener(this);
+//		reader_->add_listener(this); // todo add methdo addReader();
 	}
 
 	void BulkController::run_all_commands() {
@@ -27,6 +27,11 @@ namespace otus {
 	}
 
 	void BulkController::start() {
+		auto sptr = shared_from_this();
+
+		std::weak_ptr<BulkController> weak_ptr(sptr);
+		reader_->add_listener(weak_ptr);
+
 		reader_->start_reading_cycle();
 
 		/**
@@ -35,6 +40,8 @@ namespace otus {
 		if (depth_ == 0) {
 			run_all_commands();
 		}
+
+		reader_->remove_listener(weak_ptr);
 	}
 
 	void BulkController::update(const std::string &s) {
