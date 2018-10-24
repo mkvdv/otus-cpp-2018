@@ -1,4 +1,6 @@
 # Task09 - Check Concept
+[![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task09)](https://travis-ci.com/mkvdv/otus-cpp-2018)
+
 
 1. Ответьте на каверзный вопрос – не проверяет ли реализованная нами концепция
     `LessThenComparableCustom` ещё и `DefaultConstructible` концепцию? Если да, то как этого
