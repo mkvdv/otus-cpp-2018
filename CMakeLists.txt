@@ -40,13 +40,13 @@ add_executable(smoke_tests
         )
 
 macro(set_warning_flags target)
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fuse-ld=gold") # otherwise it fails
 		set_target_properties(${target} PROPERTIES
 			CXX_STANDARD 17
 			CXX_STANDARD_REQUIRED ON
 			COMPILE_OPTIONS "-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address"
-		)		
+		)
 	elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 		set_target_properties(${target} PROPERTIES
 			CXX_STANDARD 17
@@ -61,7 +61,7 @@ set_warning_flags(smoke_tests)
 
 target_link_libraries(smoke_tests
         gtest
-        ${GTEST_MAIN_LIBRARY} 
+        ${GTEST_MAIN_LIBRARY}
         ${CMAKE_THREAD_LIBS_INIT} )
 
 # set up testing

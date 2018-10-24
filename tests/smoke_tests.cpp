@@ -7,8 +7,6 @@
 
 namespace {
 	const size_t COMMANDS_PER_BLOCK = 3;
-
-	const bool PRINT_INPUT_ENABLED = false;
 }
 
 class SmokeTestBulk: public ::testing::Test {
@@ -23,12 +21,11 @@ protected:
 		reader = std::make_unique<otus::Reader>(*input);
 		bulk_logger = std::make_unique<otus::BulkLogger>(*output);
 
-		controller = std::make_unique<otus::BulkController>(COMMANDS_PER_BLOCK,
+		controller = std::make_shared<otus::BulkController>(COMMANDS_PER_BLOCK,
 		                                                    std::move(empty_file_logger),
 		                                                    std::move(reader),
 		                                                    std::move(bulk_logger),
-		                                                    std::move(command_pool),
-		                                                    PRINT_INPUT_ENABLED);
+		                                                    std::move(command_pool));
 
 	}
 	void TearDown() override {
@@ -47,7 +44,7 @@ protected:
 	std::unique_ptr<std::stringstream> output;
 	std::unique_ptr<std::stringstream> expected;
 
-	std::unique_ptr<otus::BulkController> controller;
+	std::shared_ptr<otus::BulkController> controller;
 	std::unique_ptr<otus::IFileLogger> empty_file_logger;
 	std::unique_ptr<otus::ICommandPool> command_pool;
 	std::unique_ptr<otus::IReader> reader;
@@ -57,7 +54,7 @@ protected:
 
 TEST_F(SmokeTestBulk, cmd5) {
 	*input << "cmd1\ncmd2\ncmd3\ncmd4\ncmd5\n";
-	*expected << "\t| bulk: cmd1, cmd2, cmd3\n" << "\t| bulk: cmd4, cmd5\n";
+	*expected << "bulk: cmd1, cmd2, cmd3\n" << "bulk: cmd4, cmd5\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
@@ -72,7 +69,7 @@ TEST_F(SmokeTestBulk, one_more_block_test) {
 	          "}\n"
 	          "cmd5\n"
 	          "cmd6\n";
-	*expected << "\t| bulk: cmd1, cmd2\n" << "\t| bulk: cmd3, cmd4\n" << "\t| bulk: cmd5, cmd6\n";
+	*expected << "bulk: cmd1, cmd2\n" << "bulk: cmd3, cmd4\n" << "bulk: cmd5, cmd6\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
@@ -86,7 +83,7 @@ TEST_F(SmokeTestBulk, one_block_test) {
 	          "cmd4\n"
 	          "}\n";
 
-	*expected << "\t| bulk: cmd1, cmd2, cmd3, cmd4\n";
+	*expected << "bulk: cmd1, cmd2, cmd3, cmd4\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
@@ -102,7 +99,7 @@ TEST_F(SmokeTestBulk, cmd7b) {
 	          "cmd6\n"
 	          "cmd7\n"
 	          "}\n";
-	*expected << "\t| bulk: cmd1, cmd2, cmd3\n" << "\t| bulk: cmd4, cmd5, cmd6, cmd7\n";
+	*expected << "bulk: cmd1, cmd2, cmd3\n" << "bulk: cmd4, cmd5, cmd6, cmd7\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
@@ -119,7 +116,7 @@ TEST_F(SmokeTestBulk, cmd_inner_block) {
 	          "cmd5\n"
 	          "cmd6\n"
 	          "}\n";
-	*expected << "\t| bulk: cmd1, cmd2, cmd3, cmd4, cmd5, cmd6\n";
+	*expected << "bulk: cmd1, cmd2, cmd3, cmd4, cmd5, cmd6\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
@@ -134,7 +131,7 @@ TEST_F(SmokeTestBulk, cmd_unclosed_block) {
 	          "cmd5\n"
 	          "cmd6\n"
 	          "cmd7\n";
-	*expected << "\t| bulk: cmd1, cmd2, cmd3\n";
+	*expected << "bulk: cmd1, cmd2, cmd3\n";
 	controller->start();
 
 	ASSERT_EQ(output->str(), expected->str());
