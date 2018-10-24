@@ -6,14 +6,11 @@ namespace otus {
 	                               std::unique_ptr<IFileLogger> file_logger,
 	                               std::unique_ptr<IReader> reader,
 	                               std::unique_ptr<IBulkLogger> bulk_logger,
-	                               std::unique_ptr<ICommandPool> command_pool,
-	                               bool print_input_enabled)
+	                               std::unique_ptr<ICommandPool> command_pool)
 		: commands_per_block_(commands_per_block),
 		  file_logger_(std::move(file_logger)),
 		  reader_(std::move(reader)),
-		  bulk_logger_(std::move(bulk_logger)),
-		  pool_(std::move(command_pool)),
-		  print_input_enabled_(print_input_enabled) {
+		  bulk_logger_(std::move(bulk_logger)), pool_(std::move(command_pool)) {
 //		reader_->add_listener(this); // todo add methdo addReader();
 	}
 
@@ -46,10 +43,6 @@ namespace otus {
 
 	void BulkController::update(const std::string &s) {
 		if (!s.empty()) {
-			if (print_input_enabled_) {
-				bulk_logger_->log_input(s);
-			}
-
 			if (s == "{") {
 				if (depth_ == 0) {
 					run_all_commands(); // flush all, if this is brand new block

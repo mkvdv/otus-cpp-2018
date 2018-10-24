@@ -25,7 +25,6 @@ namespace otus {
 	class BulkLogger: public IBulkLogger {
 	public:
 		explicit BulkLogger(std::ostream &ostream);
-		void log_input(const std::string &cmd_string) override;
 		void log_output(const std::string &bulk_message) override;
 
 	private:

@@ -44,4 +44,3 @@ namespace otus {
 	};
 
 } // namespace otus
-

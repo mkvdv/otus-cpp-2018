@@ -19,11 +19,7 @@ namespace otus {
 	BulkLogger::BulkLogger(std::ostream &ostream)
 		: ostream_(ostream) {}
 
-	void BulkLogger::log_input(const std::string &cmd_string) {
-		ostream_ << cmd_string << "\t|\n";
-	}
-
 	void BulkLogger::log_output(const std::string &bulk_message) {
-		ostream_ << "\t| " << bulk_message << '\n';
+		ostream_ << bulk_message << '\n';
 	}
 } // namespace otus
