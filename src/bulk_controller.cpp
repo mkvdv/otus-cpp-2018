@@ -1,26 +1,38 @@
 #include "bulk_controller.h"
 #include "command/command.h"
 
+
 namespace otus {
 	BulkController::BulkController(size_t commands_per_block,
-	                               std::unique_ptr<IFileLogger> file_logger,
 	                               std::unique_ptr<IReader> reader,
-	                               std::unique_ptr<IBulkLogger> bulk_logger,
-	                               std::unique_ptr<ICommandPool> command_pool)
+	                               std::unique_ptr<ICommandPool> command_pool,
+	                               otus::ThreadsafeQueue<LoggerJob> &logger_jobs,
+	                               otus::ThreadsafeQueue<FileLoggerJob> &file_logger_jobs,
+	                               std::ostream &logger_ostream,
+	                               std::ostream &stats_stream)
 		: commands_per_block_(commands_per_block),
-		  file_logger_(std::move(file_logger)),
 		  reader_(std::move(reader)),
-		  bulk_logger_(std::move(bulk_logger)), pool_(std::move(command_pool)) {
-//		reader_->add_listener(this); // todo add methdo addReader();
-	}
+		  pool_(std::move(command_pool)),
+		  logger_jobs_(logger_jobs),
+		  file_logger_jobs_(file_logger_jobs),
+		  logger_ostream_(logger_ostream),
+		  stats_stream_(stats_stream) {}
 
 	void BulkController::run_all_commands() {
 		if (pool_->size()) {
+			StatCounter diff_counter = current_counter_ - prev_jobstart_counter_;
 			std::string text = pool_->run_all_commands_and_clear();
 
-			bulk_logger_->log_output(text);
-			file_logger_->write_to_file(pool_->get_first_cmd_time_point(), text);
+			file_logger_jobs_.push(FileLoggerJob(text, pool_->get_first_cmd_time_point(), diff_counter));
+			logger_jobs_.push(LoggerJob(logger_ostream_, text, diff_counter));
+
+			prev_jobstart_counter_ = current_counter_;
 		}
+	}
+
+	BulkController::~BulkController() {
+		current_counter_.allow_strings();
+		stats_stream_ << "Stats for Main thread:\t\t" << current_counter_ << std::endl;
 	}
 
 	void BulkController::start() {
@@ -43,6 +55,7 @@ namespace otus {
 
 	void BulkController::update(const std::string &s) {
 		if (!s.empty()) {
+			current_counter_.inc_str();
 			if (s == "{") {
 				if (depth_ == 0) {
 					run_all_commands(); // flush all, if this is brand new block
@@ -56,10 +69,12 @@ namespace otus {
 				} else {
 					depth_ -= 1;
 					if (depth_ == 0) {
+						current_counter_.inc_blk();
 						run_all_commands();
 					}
 				}
 			} else {
+				current_counter_.inc_cmd();
 				pool_->add_command(std::make_unique<SimpleCommand>(s));
 				if (depth_ == 0 && pool_->size() == commands_per_block_) {
 					run_all_commands();
