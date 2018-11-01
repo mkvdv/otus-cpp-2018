@@ -6,7 +6,6 @@
 #include "../src/active/threadsafe_queue.h"
 #include "../src/active/job_pool.h"
 #include "../src/io/file_logger_job.h"
-#include "../src/active/active_logger.h"
 
 #include <iostream>
 #include <sstream>
@@ -14,11 +13,13 @@
 #include <gtest/gtest.h>
 
 /**
- * CAUTION: Tests don't care about testing file logger. ¯\_(ツ)_/¯
+ * CAUTION: Tests don't care about testing file logger, and don't tests statistics. ¯\_(ツ)_/¯
  */
 
 namespace {
 	const size_t COMMANDS_PER_BLOCK = 3;
+
+	using ActiveLogger = otus::JobPool<otus::LoggerJob, 1>;
 }
 
 class SmokeTestBulk: public ::testing::Test {
@@ -30,8 +31,7 @@ protected:
 		expected = std::make_unique<std::stringstream>();
 
 		logger_jobs = std::make_unique<otus::ThreadsafeQueue<otus::LoggerJob>>();
-		activeLogger =
-			std::make_unique<otus::ActiveLogger<otus::LoggerJob>>(*logger_jobs, *stats_output_stream);
+		activeLogger = std::make_unique<ActiveLogger>(*logger_jobs, *stats_output_stream, "logger_thread");
 		file_logger_jobs = std::make_unique<otus::ThreadsafeQueue<otus::FileLoggerJob>>();
 
 		command_pool = std::make_unique<otus::CommandPool>();
@@ -67,7 +67,7 @@ protected:
 	std::unique_ptr<std::stringstream> expected;
 
 	std::unique_ptr<otus::ThreadsafeQueue<otus::LoggerJob>> logger_jobs;
-	std::unique_ptr<otus::ActiveLogger<otus::LoggerJob>> activeLogger;
+	std::unique_ptr<ActiveLogger> activeLogger;
 
 	std::unique_ptr<otus::ThreadsafeQueue<otus::FileLoggerJob>> file_logger_jobs;
 
@@ -83,7 +83,7 @@ TEST_F(SmokeTestBulk, cmd5) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
@@ -102,7 +102,7 @@ TEST_F(SmokeTestBulk, one_more_block_test) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
@@ -120,7 +120,7 @@ TEST_F(SmokeTestBulk, one_block_test) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
@@ -140,7 +140,7 @@ TEST_F(SmokeTestBulk, cmd7b) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
@@ -161,7 +161,7 @@ TEST_F(SmokeTestBulk, cmd_inner_block) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
@@ -180,7 +180,7 @@ TEST_F(SmokeTestBulk, cmd_unclosed_block) {
 	controller->start();
 	logger_jobs->stop_wait_and_block_pushing();
 	file_logger_jobs->stop_wait_and_block_pushing();
-	activeLogger->join();
+	activeLogger->join_all();
 
 	ASSERT_EQ(logger_output_stream->str(), expected->str());
 }
