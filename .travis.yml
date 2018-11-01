@@ -16,6 +16,8 @@ script:
   - cmake ..
   - cmake --build .
   - sudo env "PATH=$PATH" cmake --build . --target test
+  - seq 0 100 | ./bin/bulkmt 10
+  - seq 0 1000 | ./bin/bulkmt 10
   - seq 0 10000 | ./bin/bulkmt 10
   - cmake --build . --target package
 deploy:

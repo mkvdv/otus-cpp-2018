@@ -5,10 +5,13 @@
 #include "io/file_logger_job.h"
 #include "active/threadsafe_queue.h"
 #include "active/job_pool.h"
-#include "active/active_logger.h"
 
 #include <iostream>
 #include <sstream>
+
+namespace {
+	using ActiveLogger = otus::JobPool<otus::LoggerJob, 1>;
+}
 
 int main(int argc, char *argv[]) {
 	if (argc - 1 != 1) {
@@ -27,14 +30,15 @@ int main(int argc, char *argv[]) {
 	 * this jobs and make logging.
 	 */
 	otus::ThreadsafeQueue<otus::LoggerJob> logger_jobs;
-	otus::ActiveLogger<otus::LoggerJob> activeLogger(logger_jobs, stats_stream);
+	ActiveLogger loggerPool(logger_jobs, stats_stream, "logger_thread");
 
 	/**
 	 * Controller also push FileLoggerJobs to file_logger_jobs queue,
 	 * and threads from file_logger_pool pop this jobs and write to file.
 	 */
 	otus::ThreadsafeQueue<otus::FileLoggerJob> file_logger_jobs;
-	otus::JobPool<otus::FileLoggerJob, 2> file_logger_pool(file_logger_jobs, stats_stream);
+	otus::JobPool<otus::FileLoggerJob, 4>
+		file_logger_pool(file_logger_jobs, stats_stream, "file_logger_thread");
 
 	std::unique_ptr<otus::IReader> reader = std::make_unique<otus::Reader>(is);
 	std::unique_ptr<otus::ICommandPool> command_pool = std::make_unique<otus::CommandPool>();
@@ -49,9 +53,11 @@ int main(int argc, char *argv[]) {
 	// reading from input stream stopped here
 
 	logger_jobs.stop_wait_and_block_pushing();      //  okay?
+	loggerPool.join_all(); // wait active_logger read all queue and stopped, else output will mess with
+	// stats
+
 	file_logger_jobs.stop_wait_and_block_pushing();
 
-	activeLogger.join(); // wait active_logger read all queue and stopped, else output will mess with stats
 
 	logger_output_stream << std::endl;
 

@@ -18,8 +18,12 @@ namespace otus {
 	template<class JobType, size_t MAX_THREADS>
 	class JobPool {
 	public:
-		JobPool(otus::ThreadsafeQueue<JobType> &task_queue, std::ostream &stats_stream)
-			: job_queue_(task_queue), stats_stream_(stats_stream) {
+		JobPool(otus::ThreadsafeQueue<JobType> &task_queue,
+		        std::ostream &stats_stream,
+		        std::string &&thread_group_name)
+			: job_queue_(task_queue),
+			  stats_stream_(stats_stream),
+			  thread_group_name_(std::move(thread_group_name)) {
 			for (size_t ix = 0; ix != MAX_THREADS; ++ix) {
 				workers_[ix] = std::move(std::thread(&JobPool::worker, this, ix));
 			}
@@ -31,8 +35,8 @@ namespace otus {
 
 			// Print Counter for all threads
 			for (size_t i = 0; i != counters_.size(); ++i) {
-				stats_stream_ << "Stats for thread" << i << " from JobPool:\t" << counters_[i]
-				              << std::endl;
+				stats_stream_ << "Stats for " << thread_group_name_ << i << "\tfrom JobPool:\t"
+				              << counters_[i] << std::endl;
 			}
 		}
 
@@ -69,6 +73,7 @@ namespace otus {
 		using queue_error_t = typename ThreadsafeQueue<JobType>::Error;
 		ThreadsafeQueue<JobType> &job_queue_;
 		std::ostream &stats_stream_;
+		std::string thread_group_name_;
 		std::array<std::thread, MAX_THREADS> workers_;
 		std::atomic<bool> done_{false};
 		std::array<StatCounter, MAX_THREADS> counters_{};
