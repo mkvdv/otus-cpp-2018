@@ -4,6 +4,3 @@
 
 ### Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
-
-#### Bugs and problems
-* Duplicate code in ActiveLogger and JobPool.
