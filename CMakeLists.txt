@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
 if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(async VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+    project(async_cli VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
-    project(async VERSION 0.0.1)
+    project(async_cli VERSION 0.0.1)
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(ASYNC_CLI async_cli)
+set(ASYNC_LIB async_lib)
 
 ##########################################################
 # set up googletest
@@ -23,7 +23,7 @@ add_subdirectory(libs/gtest/googletest)
 
 find_package(Threads)
 
-add_library(${PROJECT_NAME}
+add_library(${ASYNC_LIB}
         src/async/context.cpp
         src/async/async.cpp
         src/async/threadsafe_reader.cpp
@@ -36,7 +36,7 @@ add_library(${PROJECT_NAME}
         src/utils/counter.cpp
         )
 
-add_executable(${ASYNC_CLI} src/main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp)
 
 # old tests from non-async-like bulk
 add_executable(regression_tests
@@ -81,13 +81,13 @@ macro(set_warning_flags target)
     endif ()
 endmacro()
 
-set_warning_flags(${PROJECT_NAME})
-target_link_libraries(${PROJECT_NAME}
+set_warning_flags(${ASYNC_LIB})
+target_link_libraries(${ASYNC_LIB}
         ${CMAKE_THREAD_LIBS_INIT}
         )
 
-set_warning_flags(${ASYNC_CLI})
-target_link_libraries(${ASYNC_CLI} ${PROJECT_NAME})
+set_warning_flags(${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME} ${ASYNC_LIB})
 
 set_warning_flags(regression_tests)
 target_link_libraries(regression_tests
@@ -101,7 +101,7 @@ enable_testing()
 add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/regression_tests)
 
 # install to bin folder our binaries
-install(TARGETS ${ASYNC_CLI} RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
