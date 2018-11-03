@@ -1,11 +1,11 @@
 #pragma once
 
-#include "command/icommand_pool.h"
-#include "io/ireader.h"
-#include "io/logger_job.h"
-#include "io/file_logger_job.h"
-#include "active/threadsafe_queue.h"
-#include "utils/counter.h"
+#include "../command/icommand_pool.h"
+#include "../io/ireader.h"
+#include "../io/logger_job.h"
+#include "../io/file_logger_job.h"
+#include "../active/threadsafe_queue.h"
+#include "../utils/counter.h"
 
 #include <string>
 #include <memory>

@@ -1,5 +1,5 @@
 #include "bulk_controller.h"
-#include "command/command.h"
+#include "../command/command.h"
 
 
 namespace otus {

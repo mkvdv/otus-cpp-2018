@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.8)
 
 if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(bulkmt VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+    project(async VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
-    project(bulkmt VERSION 0.0.1)
+    project(async VERSION 0.0.1)
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(ASYNC_CLI async_cli)
 
 ##########################################################
 # set up googletest
@@ -22,44 +23,61 @@ add_subdirectory(libs/gtest/googletest)
 
 find_package(Threads)
 
-add_executable(${PROJECT_NAME}
-        src/main.cpp
-        src/command/command.cpp
+add_library(${PROJECT_NAME}
+        src/async/context.cpp
+        src/async/async.cpp
+        src/async/threadsafe_reader.cpp
+        src/controller/bulk_controller.cpp
         src/io/reader.cpp
-        src/command/command_pool.cpp
-        src/bulk_controller.cpp
         src/io/logger_job.cpp
-        src/utils/counter.cpp
         src/io/file_logger_job.cpp
+        src/command/command.cpp
+        src/command/command_pool.cpp
+        src/utils/counter.cpp
         )
 
-add_executable(smoke_tests
+add_executable(${ASYNC_CLI} src/main.cpp)
+
+# old tests from non-async-like bulk
+add_executable(regression_tests
         tests/alltests_runner.cpp
         tests/smoke_tests.cpp
         src/command/command.cpp
         src/io/reader.cpp
         src/command/command_pool.cpp
-        src/bulk_controller.cpp
+        src/controller/bulk_controller.cpp
         src/io/logger_job.cpp
         src/utils/counter.cpp
         src/io/file_logger_job.cpp
         )
 
+message("${CMAKE_CXX_COMPILER_ID}")
 macro(set_warning_flags target)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -Wall -Wextra -Werror -Wpedantic -fsanitize=address -ggdb")
+        message("!!! GCC DETECTED !!!!")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=thread")
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 17
                 CXX_STANDARD_REQUIRED ON
                 LINK_LIBRARIES pthread
-                COMPILE_OPTIONS "-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address;-ggdb;-O0"
+                COMPILE_OPTIONS "-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=thread;-ggdb;-O0"
+                )
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        message("!!! CLANG DETECTED !!!!")
+        set_target_properties(${target} PROPERTIES
+                CXX_STANDARD 17
+                CXX_STANDARD_REQUIRED ON
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        message("!!! MSVC DETECTED !!!!")
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 17
                 CXX_STANDARD_REQUIRED ON
                 COMPILE_OPTIONS "/W4"
                 )
+    else ()
+        message("!!! NO COMPILER DETECTED, WARNING FLAGS NOT SETTED !!!!")
     endif ()
 endmacro()
 
@@ -68,8 +86,11 @@ target_link_libraries(${PROJECT_NAME}
         ${CMAKE_THREAD_LIBS_INIT}
         )
 
-set_warning_flags(smoke_tests)
-target_link_libraries(smoke_tests
+set_warning_flags(${ASYNC_CLI})
+target_link_libraries(${ASYNC_CLI} ${PROJECT_NAME})
+
+set_warning_flags(regression_tests)
+target_link_libraries(regression_tests
         gtest
         ${GTEST_MAIN_LIBRARY}
         ${CMAKE_THREAD_LIBS_INIT}
@@ -77,10 +98,10 @@ target_link_libraries(smoke_tests
 
 # set up testing
 enable_testing()
-add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/smoke_tests)
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/regression_tests)
 
 # install to bin folder our binaries
-install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+install(TARGETS ${ASYNC_CLI} RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
