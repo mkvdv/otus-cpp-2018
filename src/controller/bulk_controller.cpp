@@ -1,3 +1,5 @@
+#include <utility>
+
 #include "bulk_controller.h"
 #include "../command/command.h"
 
@@ -9,14 +11,16 @@ namespace otus {
 	                               otus::ThreadsafeQueue<LoggerJob> &logger_jobs,
 	                               otus::ThreadsafeQueue<FileLoggerJob> &file_logger_jobs,
 	                               std::ostream &logger_ostream,
-	                               std::ostream &stats_stream)
+	                               std::ostream &stats_stream,
+	                               std::string prefix)
 		: commands_per_block_(commands_per_block),
 		  reader_(std::move(reader)),
 		  pool_(std::move(command_pool)),
 		  logger_jobs_(logger_jobs),
 		  file_logger_jobs_(file_logger_jobs),
 		  logger_ostream_(logger_ostream),
-		  stats_stream_(stats_stream) {}
+		  stats_stream_(stats_stream),
+		  prefix_(std::move(prefix)) {}
 
 	void BulkController::run_all_commands() {
 		if (pool_->size()) {
@@ -24,7 +28,7 @@ namespace otus {
 			std::string text = pool_->run_all_commands_and_clear();
 
 			file_logger_jobs_.push(FileLoggerJob(text, pool_->get_first_cmd_time_point(), diff_counter));
-			logger_jobs_.push(LoggerJob(logger_ostream_, text, diff_counter));
+			logger_jobs_.push(LoggerJob(logger_ostream_, text, diff_counter, prefix_));
 
 			prev_jobstart_counter_ = current_counter_;
 		}
@@ -32,7 +36,7 @@ namespace otus {
 
 	BulkController::~BulkController() {
 		current_counter_.allow_strings();
-		stats_stream_ << "Stats for Main thread:\t\t" << current_counter_ << std::endl;
+		stats_stream_ << prefix_ << "Stats for Main thread:\t\t" << current_counter_ << std::endl;
 	}
 
 	void BulkController::start() {

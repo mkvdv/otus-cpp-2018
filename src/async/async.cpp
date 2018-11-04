@@ -8,7 +8,9 @@
 
 namespace otus::async {
 	namespace {
-		std::map<std::size_t, std::unique_ptr<Context>> g_contexts_;
+		std::map<uint64_t, std::unique_ptr<Context>> g_contexts_;
+
+		uint64_t context_counter = 0;
 
 		std::mutex mt;
 	} // anonymous namespace
@@ -16,34 +18,41 @@ namespace otus::async {
 
 	handle_t connect(std::size_t bulk) {
 		std::lock_guard lock_guard(mt);
+		++context_counter;
 
-		auto it = g_contexts_.find(bulk);
-
-		if (it != g_contexts_.end()) {
-			it->second->inc_connection();
-			return it->second.get(); // c-style out of this functions, so we can
+		auto p = g_contexts_.emplace(context_counter,
+		                             std::make_unique<Context>(bulk,
+		                                                       std::string{"["}
+			                                                       + std::to_string(context_counter)
+			                                                       + "] "));
+		if (p.second) {
+			return reinterpret_cast<handle_t>(context_counter);
 		} else {
-			g_contexts_.emplace(bulk, std::make_unique<Context>(bulk));
-			return g_contexts_.find(bulk)->second.get();
+			--context_counter;
+			throw std::runtime_error("Can't create new context");
 		}
 	}
 
 	void receive(handle_t handle, const char *data, std::size_t size) {
 		std::lock_guard lock_guard(mt);
 
-		Context *context_ptr = static_cast<Context *>(handle);
-		context_ptr->input(std::string(data, size));
+		auto it = g_contexts_.find(reinterpret_cast<size_t >(handle));
+		if (it != g_contexts_.end()) {
+			it->second->input(std::string(data, size));
+		} else {
+			throw std::runtime_error("Invalid handle, not created or already deleted");
+		}
 	}
 
 	void disconnect(handle_t handle) {
 		std::lock_guard lock_guard(mt);
 
-		Context *context_ptr = static_cast<Context *>(handle);
-		context_ptr->dec_connection();
-
-		if (!context_ptr->connections()) {
-			context_ptr->block_queue_input_and_stop_waiters();
-			g_contexts_.erase(context_ptr->get_bulk_size());
+		auto it = g_contexts_.find(reinterpret_cast<size_t >(handle));
+		if (it != g_contexts_.end()) {
+			it->second->block_queue_input_and_stop_waiters();
+			g_contexts_.erase(it);
+		} else {
+			throw std::runtime_error("Invalid handle, not created or already deleted");
 		}
 	}
 } // namespace otus::async

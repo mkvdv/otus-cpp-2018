@@ -14,7 +14,7 @@ int main() {
 
 	as::receive(h1, "1", 1);
 	as::receive(h2, "1\n", 2);
-	as::receive(h3, "0\n0\n0\n0\n0\n0\n", 12); // <-- other Context, output can be mixed
+	as::receive(h3, "0\n0\n0\n0\n0\n0\n", 12); // <--  output can be mixed
 
 
 	as::receive(h1, "\n2\n3\n4\n5\n6\n{\na\n", 15);

@@ -30,7 +30,7 @@ namespace otus::async {
 	public:
 		using ActiveLogger = otus::JobPool<otus::LoggerJob, 1>;
 
-		explicit Context(size_t bulk_size);
+		explicit Context(size_t bulk_size, const std::string &prefix);
 
 		Context(Context &&) = delete;
 		Context &operator=(Context &&) = delete;
@@ -40,10 +40,7 @@ namespace otus::async {
 		Context &operator=(const Context &) = delete;
 
 		void input(const std::string &);
-		void inc_connection();
-		void dec_connection();
 		void block_queue_input_and_stop_waiters();
-		size_t connections() const;
 		size_t get_bulk_size() const;
 
 		~Context();
@@ -68,7 +65,6 @@ namespace otus::async {
 		ThreadsafeQueue<std::string> queue_of_input_lines_{};
 		std::string previosly_lost_str_{};
 
-		size_t connections_ = 1;
 		std::thread worker_;
 	};
 

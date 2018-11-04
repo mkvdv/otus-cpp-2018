@@ -31,8 +31,7 @@ namespace otus {
 		               std::unique_ptr<ICommandPool> command_pool,
 		               otus::ThreadsafeQueue<LoggerJob> &logger_jobs,
 		               otus::ThreadsafeQueue<FileLoggerJob> &file_logger_jobs,
-		               std::ostream &logger_ostream,
-		               std::ostream &stats_stream);
+		               std::ostream &logger_ostream, std::ostream &stats_stream, std::string prefix = "");
 		~BulkController() override;
 
 		/*
@@ -67,5 +66,6 @@ namespace otus {
 		size_t depth_ = 0;
 		StatCounter current_counter_{};
 		StatCounter prev_jobstart_counter_{};
+		std::string prefix_; // better logging
 	};
 } // namespace otus
