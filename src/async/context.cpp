@@ -7,10 +7,11 @@
 #include "threadsafe_reader.h"
 
 namespace otus::async {
-	Context::Context(size_t bulk_size, const std::string &prefix)
+	Context::Context(size_t bulk_size)
 		: bulk_size_(bulk_size),
-		  active_logger_(logger_jobs_, std::cout, "logger_thread", prefix),
-		  file_logger_pool_(file_logger_jobs_, std::cout, "file_logger_thread", prefix) {
+		  prefix_(std::string{"["} + std::to_string(reinterpret_cast<unsigned long long>(this)) + "] "),
+		  active_logger_(logger_jobs_, std::cout, "logger_thread", prefix_),
+		  file_logger_pool_(file_logger_jobs_, std::cout, "file_logger_thread", prefix_) {
 		command_pool_ = std::make_unique<otus::CommandPool>();
 		reader_ = std::make_unique<ThreadsafeReader>(queue_of_input_lines_);
 		controller_ = std::make_shared<otus::BulkController>(bulk_size_,
@@ -18,7 +19,9 @@ namespace otus::async {
 		                                                     std::move(command_pool_),
 		                                                     logger_jobs_,
 		                                                     file_logger_jobs_,
-		                                                     std::cout, std::cout, prefix);
+		                                                     std::cout,
+		                                                     std::cout,
+		                                                     prefix_);
 		worker_ = std::thread([this]() {
 			controller_->start();
 
@@ -80,10 +83,6 @@ namespace otus::async {
 
 	void Context::block_queue_input_and_stop_waiters() {
 		queue_of_input_lines_.stop_wait_and_block_pushing();
-	}
-
-	size_t Context::get_bulk_size() const {
-		return bulk_size_;
 	}
 
 } // namespace otus::async

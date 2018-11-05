@@ -30,7 +30,7 @@ namespace otus::async {
 	public:
 		using ActiveLogger = otus::JobPool<otus::LoggerJob, 1>;
 
-		explicit Context(size_t bulk_size, const std::string &prefix);
+		explicit Context(size_t bulk_size);
 
 		Context(Context &&) = delete;
 		Context &operator=(Context &&) = delete;
@@ -41,7 +41,6 @@ namespace otus::async {
 
 		void input(const std::string &);
 		void block_queue_input_and_stop_waiters();
-		size_t get_bulk_size() const;
 
 		~Context();
 
@@ -52,6 +51,7 @@ namespace otus::async {
 		std::pair<std::list<std::string>, std::string> split(std::string &&);
 
 		size_t bulk_size_;
+		std::string prefix_;
 
 		otus::ThreadsafeQueue<otus::LoggerJob> logger_jobs_{};
 		ActiveLogger active_logger_;
