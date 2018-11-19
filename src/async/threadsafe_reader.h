@@ -18,6 +18,6 @@ namespace otus::async {
 		void start_reading_cycle() override;
 	private:
 		queue_t &queue_of_lines_;
-		std::atomic<bool> stopped_;
+		std::atomic<bool> stopped_{false};
 	};
 } // namespace otus::async
