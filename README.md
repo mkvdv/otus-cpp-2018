@@ -4,3 +4,13 @@
 
 ### Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
+
+### Usage
+```bash
+./build/bin/bulk_server --port=9000 --bulk_size=3
+```
+
+* You can enable inner loggingm if you want, using  `logging` parameter:
+```bash
+./build/bin/bulk_server --port=9000 --bulk_size=3 --logging=true
+```

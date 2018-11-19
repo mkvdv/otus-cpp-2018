@@ -21,7 +21,7 @@ set(GTEST_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googletest/include
 add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
-SET(Boost_USE_STATIC_LIBS ON)
+ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
 find_package(Boost COMPONENTS system program_options log REQUIRED)
 find_package(Threads)
 include_directories(${Boost_INCLUDE_DIRS})
