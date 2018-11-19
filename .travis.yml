@@ -1,7 +1,7 @@
 language: cpp
 branches:
   only:
-  - task11
+  - task12
 before_script:
   - mkdir build
 addons:
@@ -15,14 +15,13 @@ script:
   - cd build
   - cmake ..
   - cmake --build .
-  - ./bin/async_cli
+  - ./bin/bulk_server
   - sudo env "PATH=$PATH" cmake --build . --target test
   - cmake --build . --target package
 deploy:
   - provider: script
     skip_cleanup: true
     on:
-      branch: task11
+      branch: task12
     script:
-    - curl -T async_cli-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus11/async_cli/0.0.$TRAVIS_BUILD_NUMBER/async_cli-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
-
+    - curl -T bulk_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus12/bulk_server/0.0.$TRAVIS_BUILD_NUMBER/bulk_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"

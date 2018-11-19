@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.8)
 
 if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(async_cli VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+    project(bulk_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
-    project(async_cli VERSION 0.0.1)
+    project(bulk_server VERSION 0.0.1)
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -21,7 +21,10 @@ set(GTEST_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googletest/include
 add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
+SET(Boost_USE_STATIC_LIBS ON)
+find_package(Boost COMPONENTS system program_options log REQUIRED)
 find_package(Threads)
+include_directories(${Boost_INCLUDE_DIRS})
 
 add_library(${ASYNC_LIB}
         src/async/context.cpp
@@ -36,7 +39,11 @@ add_library(${ASYNC_LIB}
         src/utils/counter.cpp
         )
 
-add_executable(${PROJECT_NAME} src/main.cpp)
+add_executable(${PROJECT_NAME}
+        src/main.cpp
+        src/server.cpp
+        src/exceptions/exception.cpp
+        )
 
 # old tests from non-async-like bulk
 add_executable(regression_tests
@@ -55,12 +62,12 @@ message("${CMAKE_CXX_COMPILER_ID}")
 macro(set_warning_flags target)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         message("!!! GCC DETECTED !!!!")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=thread")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address")
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 17
                 CXX_STANDARD_REQUIRED ON
                 LINK_LIBRARIES pthread
-                COMPILE_OPTIONS "-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=thread;-ggdb;-O0"
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address;-ggdb"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         message("!!! CLANG DETECTED !!!!")
@@ -87,7 +94,11 @@ target_link_libraries(${ASYNC_LIB}
         )
 
 set_warning_flags(${PROJECT_NAME})
-target_link_libraries(${PROJECT_NAME} ${ASYNC_LIB})
+target_link_libraries(${PROJECT_NAME}
+        ${Boost_LIBRARIES}
+        ${CMAKE_THREAD_LIBS_INIT}
+        ${ASYNC_LIB}
+        )
 
 set_warning_flags(regression_tests)
 target_link_libraries(regression_tests
