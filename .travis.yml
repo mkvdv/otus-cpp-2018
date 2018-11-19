@@ -10,7 +10,7 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-7
-      - libboost-test-dev
+      - libboost-all-dev
 script:
   - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
