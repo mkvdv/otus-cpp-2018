@@ -1,9 +1,10 @@
 #pragma once
 
-#include <exception>
+#include <stdexcept>
 
 namespace otus::exception {
-  class terminate_exception : public std::exception {
-	  const char *what() const noexcept override;
+  class terminate_exception : public std::runtime_error {
+   public:
+	explicit terminate_exception(const char *what_arg) : runtime_error(what_arg) {}
   };
 } // namespace otus::exception

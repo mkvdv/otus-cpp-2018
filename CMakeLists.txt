@@ -1,68 +1,38 @@
 cmake_minimum_required(VERSION 3.8)
 
 if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(bulk_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+    project(join_server VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
-    project(bulk_server VERSION 0.0.1)
+    project(join_server VERSION 0.0.1)
 endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(ASYNC_LIB async_lib)
-
-##########################################################
-# set up googletest
-execute_process(COMMAND git submodule update --init -- libs/gtest
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-
-# set GTEST_INCLUDE_DIR properly
-set(GTEST_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googletest/include
-        CACHE PATH "path to gtest includes")
-# run cmake for gtest too
-add_subdirectory(libs/gtest/googletest)
-##########################################################
 
 ADD_DEFINITIONS(-DBOOST_LOG_DYN_LINK)
-find_package(Boost COMPONENTS system program_options log REQUIRED)
+find_package(Boost COMPONENTS system program_options log unit_test_framework REQUIRED)
 find_package(Threads)
 include_directories(${Boost_INCLUDE_DIRS})
-
-add_library(${ASYNC_LIB}
-        src/async/context.cpp
-        src/async/async.cpp
-        src/async/threadsafe_reader.cpp
-        src/controller/bulk_controller.cpp
-        src/io/reader.cpp
-        src/io/logger_job.cpp
-        src/io/file_logger_job.cpp
-        src/command/command.cpp
-        src/command/command_pool.cpp
-        src/utils/counter.cpp
-        )
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
         src/server.cpp
-        src/exceptions/exception.cpp
+        src/model/simple_table.cpp
+        src/model/two_tables_storage.cpp
+        src/jobs/request_job.cpp
+        src/utils/utils.cpp
+        tests/table_tests.cpp
         )
 
-# old tests from non-async-like bulk
-add_executable(regression_tests
-        tests/alltests_runner.cpp
-        tests/smoke_tests.cpp
-        src/command/command.cpp
-        src/io/reader.cpp
-        src/command/command_pool.cpp
-        src/controller/bulk_controller.cpp
-        src/io/logger_job.cpp
-        src/utils/counter.cpp
-        src/io/file_logger_job.cpp
+add_executable(test_table
+        tests/table_tests.cpp
+        src/model/simple_table.cpp
         )
 
 message("${CMAKE_CXX_COMPILER_ID}")
 macro(set_warning_flags target)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         message("!!! GCC DETECTED !!!!")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address -Wall -Wextra -pedantic")
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 17
                 CXX_STANDARD_REQUIRED ON
@@ -84,32 +54,27 @@ macro(set_warning_flags target)
                 COMPILE_OPTIONS "/W4"
                 )
     else ()
-        message("!!! NO COMPILER DETECTED, WARNING FLAGS NOT SETTED !!!!")
+        message(FATAL_ERROR "!!! NO COMPILER DETECTED, WARNING FLAGS NOT SETTED !!!!")
     endif ()
 endmacro()
-
-set_warning_flags(${ASYNC_LIB})
-target_link_libraries(${ASYNC_LIB}
-        ${CMAKE_THREAD_LIBS_INIT}
-        )
 
 set_warning_flags(${PROJECT_NAME})
 target_link_libraries(${PROJECT_NAME}
         ${Boost_LIBRARIES}
         ${CMAKE_THREAD_LIBS_INIT}
-        ${ASYNC_LIB}
         )
 
-set_warning_flags(regression_tests)
-target_link_libraries(regression_tests
-        gtest
-        ${GTEST_MAIN_LIBRARY}
-        ${CMAKE_THREAD_LIBS_INIT}
+set_target_properties(test_table PROPERTIES
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+        CXX_STANDARD 17
+        CXX_STANDARD_REQUIRED ON
         )
+target_link_libraries(test_table ${Boost_LIBRARIES})
+
 
 # set up testing
 enable_testing()
-add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/regression_tests)
+add_test(unit_table_testing ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_table)
 
 # install to bin folder our binaries
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)

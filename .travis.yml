@@ -1,7 +1,7 @@
 language: cpp
 branches:
   only:
-  - task12
+  - task13
 before_script:
   - mkdir build
 addons:
@@ -22,6 +22,6 @@ deploy:
   - provider: script
     skip_cleanup: true
     on:
-      branch: task12
+      branch: task13
     script:
-    - curl -T bulk_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus12/bulk_server/0.0.$TRAVIS_BUILD_NUMBER/bulk_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -T join_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus13/join_server/0.0.$TRAVIS_BUILD_NUMBER/join_server-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
