@@ -24,3 +24,4 @@ deploy:
       branch: task14
     script:
       - curl -T yamr-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus14/yamr/0.0.$TRAVIS_BUILD_NUMBER/yamr-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+
