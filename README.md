@@ -7,18 +7,10 @@
 
 ### Usage
 ```bash
---src=input.txt --mnum=5 --rnum=6 
+./yamr --src=input.txt --mnum=5 --rnum=6 
 ```
 
 * You can enable inner logging if you want, using `logging` parameter:
 ```bash
-yamr --src=input.txt --mnum=5 --rnum=6 --logging=true
-```
-
-### Testing
-* There are simple test client `tests/simple_test_client.py`. How to test:
-```bash
-# in first terminal
-./build/bin/yamr 
-
+./yamr --src=input.txt --mnum=5 --rnum=6 --logging=true
 ```
