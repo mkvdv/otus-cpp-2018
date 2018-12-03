@@ -1,0 +1,28 @@
+language: cpp
+branches:
+  only:
+    - task15
+before_script:
+  - mkdir build
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - libboost-all-dev
+      - libdlib-dev
+      - libopenblas-dev
+script:
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - cmake --build . --target package
+deploy:
+  - provider: script
+    skip_cleanup: true
+    on:
+      branch: task15
+    script:
+      - curl -T kkmeans-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus15/kkmeans/0.0.$TRAVIS_BUILD_NUMBER/kkmeans-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
