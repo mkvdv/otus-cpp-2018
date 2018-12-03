@@ -4,6 +4,7 @@ branches:
     - task15
 before_script:
   - mkdir build
+  - sudo apt update
 addons:
   apt:
     sources:
