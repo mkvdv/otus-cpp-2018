@@ -11,7 +11,7 @@
 
 ## Usage
 
-####Generate data
+#### Generate data
 
 * Generate random clusters-like input data
 
