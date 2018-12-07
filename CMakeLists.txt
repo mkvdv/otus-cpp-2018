@@ -13,7 +13,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/classification/classificaction.cpp
+        src/clusterization/clusterization.cpp
         )
 
 message("${CMAKE_CXX_COMPILER_ID}")

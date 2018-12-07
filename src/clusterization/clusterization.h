@@ -17,6 +17,6 @@ namespace otus {
   using kernel_type = dlib::radial_basis_kernel<sample_type>;
 
   std::vector<sample_type> read_from(std::istream &is);
-  void classify(size_t k);
+  void clusterize(size_t k);
 
 } // namespace otus
