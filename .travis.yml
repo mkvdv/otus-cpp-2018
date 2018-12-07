@@ -20,4 +20,4 @@ deploy:
   on:
     branch: task02
   script:
-    - curl -T cpp_02-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus02/cpp_02/0.0.$TRAVIS_BUILD_NUMBER/cpp_02-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -T build/bincpp_02-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus02/cpp_02/0.0.$TRAVIS_BUILD_NUMBER/cpp_02-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
