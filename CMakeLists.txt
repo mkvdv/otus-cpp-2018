@@ -86,3 +86,7 @@ set(CPACK_PACKAGE_CONTACT noname@nomail.no)
 
 # include will generate proper code for .deb generation
 include(CPack)
+
+# set up testing
+enable_testing()
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/test_utils)
