@@ -5,7 +5,6 @@
 ## Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
 * Requirements:
-    * python3, matplotlib library
     * dlib
     * openblas
 
