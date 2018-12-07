@@ -23,7 +23,6 @@ add_executable(rclss
         src/classification/classification.cpp
         )
 
-
 message("${CMAKE_CXX_COMPILER_ID}")
 macro(set_warning_flags target)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
