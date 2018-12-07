@@ -68,7 +68,9 @@ target_link_libraries(rclss
         )
 
 # install to bin folder our binaries
-install(TARGETS RUNTIME DESTINATION bin)
+install(TARGETS rclst rclss
+        RUNTIME
+        DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
