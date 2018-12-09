@@ -59,8 +59,11 @@ target_link_libraries(simple_tests
 set_target_properties(simple_tests PROPERTIES
         COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
         COMPILE_OPTIONS -Wall -Wextra -Werror -Wpedantic -fsanitize=address
-        INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
         )
+
+# set up testing
+enable_testing()
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/simple_tests)
 
 # install to bin folder our binaries
 install(TARGETS ${PROJECT_NAME}
