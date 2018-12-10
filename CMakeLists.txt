@@ -10,6 +10,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
+ADD_DEFINITIONS(-DBOOST_TEST_DYN_LINK)
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
@@ -55,10 +56,6 @@ set_warning_flags(${PROJECT_NAME})
 set_warning_flags(simple_tests)
 target_link_libraries(simple_tests
         ${Boost_LIBRARIES}
-        )
-set_target_properties(simple_tests PROPERTIES
-        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-        COMPILE_OPTIONS -Wall -Wextra -Werror -Wpedantic -fsanitize=address
         )
 
 # set up testing
