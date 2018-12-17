@@ -3,6 +3,7 @@
 #include "../hashing/hashing.h"
 
 #include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
 
 namespace otus {
   namespace fs = boost::filesystem;
