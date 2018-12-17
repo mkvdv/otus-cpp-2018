@@ -7,7 +7,6 @@ Utility for detecting duplicate files.
 ## Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
 * Required Boost and OpenSSL libraries
-    
 
 ## Usage
 * There are such program options
