@@ -11,7 +11,7 @@ Utility for detecting duplicate files.
 
 ## Usage
 * There are such program options
-```bash
+```txt
 Allowed options:
   --help                produce help message
   --dirs arg            directories
