@@ -1,0 +1,30 @@
+dist: xenial
+language: cpp
+branches:
+  only:
+    - task08_2
+before_script:
+  - mkdir build
+  - sudo apt update
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-7
+      - libboost-test-dev
+      - openssl
+      - openssl-dev
+script:
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - cmake --build . --target package
+deploy:
+  - provider: script
+    skip_cleanup: true
+    on:
+      branch: task08_2
+    script:
+      - curl -T bayan-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus08_2/bayan/0.0.$TRAVIS_BUILD_NUMBER/bayan-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
