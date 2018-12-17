@@ -7,7 +7,7 @@ namespace otus {
       for (const fs::path &p: dirs) {
           fs::file_status st = fs::status(p);
           if (!fs::exists(p) || !fs::is_directory(st)) {
-              throw std::runtime_error(p.generic_path().string() + " is not a directory");
+              throw std::runtime_error(p.generic_string() + " is not a directory");
           }
       }
   }
