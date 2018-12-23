@@ -9,7 +9,7 @@ before_script:
 addons:
   apt:
     packages:
-      - libboost-all-dev
+      - libboost-test-dev
 script:
   - cd build
   - cmake ..
