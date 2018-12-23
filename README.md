@@ -1,8 +1,9 @@
-# otus-cpp-2018
+# Task 01 - Helloworld. 
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task01)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[ ![Download](https://api.bintray.com/packages/mkvdv/otus01/cpp_01/images/download.svg) ](https://bintray.com/mkvdv/otus01/cpp_01/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/_latestVersion)
 
-Task01 - Helloworld.  
+ 
 Simple example of CI/CD.
 
-Notes: all build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
+### Notes
+* All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
