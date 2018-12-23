@@ -1,10 +1,11 @@
 cmake_minimum_required(VERSION 3.8)
 
-if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(cpp_02 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if (DEFINED ENV{TRAVIS_BUILD_NUMBER} AND DEFINED ENV{VERSION_MAJOR} AND DEFINED ENV{VERSION_MINOR})
+    project(ip_filter VERSION $ENV{VERSION_MAJOR}.$ENV{VERSION_MINOR}.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
-    project(cpp_02 VERSION 0.0.1)
+    project(ip_filter VERSION 1.0.1)
 endif ()
+
 
 find_package(Threads)
 
@@ -22,7 +23,7 @@ add_subdirectory(libs/gtest/googletest)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-add_executable(ip_filter
+add_executable(${PROJECT_NAME}
         src/ip_filter.cpp
         src/filters.cpp
         src/utils.cpp)
@@ -61,7 +62,7 @@ macro(set_warning_flags target)
     endif ()
 endmacro()
 
-set_warning_flags(ip_filter)
+set_warning_flags(${PROJECT_NAME})
 
 set_warning_flags(test_utils)
 target_link_libraries(test_utils
@@ -71,7 +72,7 @@ target_link_libraries(test_utils
         )
 
 # install to bin folder our binaries
-install(TARGETS ip_filter
+install(TARGETS ${PROJECT_NAME}
         RUNTIME
         DESTINATION bin)
 
@@ -83,6 +84,8 @@ set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
 set(CPACK_PACKAGE_CONTACT noname@nomail.no)
+
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 # include will generate proper code for .deb generation
 include(CPack)
