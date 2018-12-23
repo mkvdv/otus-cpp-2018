@@ -22,4 +22,4 @@ deploy:
   on:
     branch: task01
   script:
-    - curl -T hello_world-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/$TRAVIS_BUILD_NUMBER/hello_world-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -T hello_world-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/hello_world-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
