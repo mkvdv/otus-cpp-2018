@@ -1,9 +1,9 @@
 dist: xenial
 language: cpp
-compiler: gcc
+compiler: clang
 env:
   global:
-    - VERSION_MAJOR=2
+    - VERSION_MAJOR=3
     - VERSION_MINOR=0
 before_script:
   - mkdir build
