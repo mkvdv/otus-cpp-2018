@@ -1,20 +1,21 @@
 dist: xenial
 language: cpp
+compiler:
+  - clang
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
     - task07_2
 before_script:
   - mkdir build
-  - sudo apt update
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
-      - g++-7
       - libboost-test-dev
 script:
-  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
   - cmake ..
   - cmake --build .
@@ -25,4 +26,4 @@ deploy:
     on:
       branch: task07_2
     script:
-      - curl -T nickname-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus07_2/nickname/0.0.$TRAVIS_BUILD_NUMBER/nickname-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+      - curl -T nickname-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/nickname/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/nickname-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
