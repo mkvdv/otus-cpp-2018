@@ -1,6 +1,6 @@
 # Task 01 - Helloworld. 
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task01)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=1.0.153) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/1.0.153/link)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=hello_world) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/hello_world/link)
 
  
 Simple example of CI/CD.
