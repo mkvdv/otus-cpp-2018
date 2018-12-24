@@ -1,7 +1,5 @@
 dist: xenial
 language: cpp
-compiler:
-  - clang
 branches:
   only:
     - task08_2
