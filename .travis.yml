@@ -1,16 +1,14 @@
+dist: xenial
 language: cpp
+compiler: gcc
+env:
+  global:
+    - VERSION_MAJOR=2
+    - VERSION_MINOR=0
 before_script:
   - mkdir build
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-7
 script:
-  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
-  - export LSAN_OPTIONS=verbosity=1:log_threads=1
   - cmake ..
   - cmake --build .
   - sudo env "PATH=$PATH" cmake --build . --target test
@@ -19,6 +17,6 @@ deploy:
   provider: script
   skip_cleanup: true
   on:
-      branch: task03
+    branch: task03
   script:
-  - curl -T cpp_03-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus03/cpp_03/0.0.$TRAVIS_BUILD_NUMBER/cpp_03-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+    - curl -T allocator-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/allocator-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"

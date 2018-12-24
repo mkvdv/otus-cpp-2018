@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.8)
 
-project(cpp_03 VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if (DEFINED ENV{TRAVIS_BUILD_NUMBER} AND DEFINED ENV{VERSION_MAJOR} AND DEFINED ENV{VERSION_MINOR})
+    project(allocator VERSION $ENV{VERSION_MAJOR}.$ENV{VERSION_MINOR}.$ENV{TRAVIS_BUILD_NUMBER})
+else ()
+    project(allocator VERSION 1.0.1)
+endif ()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
@@ -16,36 +20,54 @@ set(GTEST_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/libs/gtest/googletest/include
 add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
-add_executable(allocator	./src/main.cpp)
-add_executable(unit_tests	./tests/alltests.cpp
-        				  	./tests/mylist_tests.cpp
-					        ./tests/fixed_size_list_tests.cpp
-					        ./tests/allocator_tests.cpp)
+find_package(Threads)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fuse-ld=gold") # it fails otherwise
+add_executable(${PROJECT_NAME} ./src/main.cpp)
 
-set_target_properties(allocator PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
-)
+add_executable(unit_tests
+        ./tests/alltests.cpp
+        ./tests/mylist_tests.cpp
+        ./tests/fixed_size_list_tests.cpp
+        ./tests/allocator_tests.cpp)
 
-set_target_properties(unit_tests PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
-    COMPILE_OPTIONS "-O0;-Wshadow;-Wall;-Wextra;-Werror;-pedantic;-Wfloat-equal;-Winit-self;-Wuninitialized;-Wwrite-strings;-Wcast-align;-Wmissing-include-dirs;-Wswitch-enum;-Wswitch-default;-Winvalid-pch;-Wredundant-decls;-Wformat=2;-Wmissing-format-attribute;-Wformat-nonliteral;-fno-inline-functions;-fmax-errors=3;-Wno-unused-local-typedefs;-fsanitize=address"
-)
+message("${CMAKE_CXX_COMPILER_ID}")
+macro(set_warning_flags target)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+        message("!!! GCC DETECTED !!!!")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address -Wall -Wextra -pedantic")
+        set_target_properties(${target} PROPERTIES
+                CXX_STANDARD 17
+                CXX_STANDARD_REQUIRED ON
+                LINK_LIBRARIES pthread
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address;-ggdb"
+                )
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+        message("!!! CLANG DETECTED !!!!")
+        set_target_properties(${target} PROPERTIES
+                CXX_STANDARD 17
+                CXX_STANDARD_REQUIRED ON
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic;-Wno-unused-variable"
+                )
+    elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+        message("!!! MSVC DETECTED !!!!")
+        set_target_properties(${target} PROPERTIES
+                CXX_STANDARD 17
+                CXX_STANDARD_REQUIRED ON
+                COMPILE_OPTIONS "/W4"
+                )
+    else ()
+        message(FATAL_ERROR "!!! NO COMPILER DETECTED, WARNING FLAGS NOT SETTED !!!!")
+    endif ()
+endmacro()
+
+set_warning_flags(${PROJECT_NAME})
+set_warning_flags(unit_tests)
 
 target_link_libraries(unit_tests
         gtest
-        gtest_main
-        pthread
+        ${GTEST_MAIN_LIBRARY}
+        ${CMAKE_THREAD_LIBS_INIT}
         )
-
-# # set up testing
-enable_testing()
-add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unit_tests)
-
 
 # install to bin folder our binaries
 install(TARGETS allocator RUNTIME DESTINATION bin)
@@ -59,5 +81,11 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
 set(CPACK_PACKAGE_CONTACT noname@nomail.no)
 
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+
 # include will generate proper code for .deb generation
 include(CPack)
+
+# # set up testing
+enable_testing()
+add_test(tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/unit_tests)
