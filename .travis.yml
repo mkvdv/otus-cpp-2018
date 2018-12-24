@@ -1,17 +1,17 @@
+dist: xenial
 language: cpp
+compiler:
+  - clang
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
-  - task10
+    - task10
 before_script:
   - mkdir build
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-7
 script:
-  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
   - cmake ..
   - cmake --build .
@@ -26,5 +26,5 @@ deploy:
     on:
       branch: task10
     script:
-    - curl -T bulkmt-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus10/bulkmt/0.0.$TRAVIS_BUILD_NUMBER/bulkmt-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+      - curl -T bulkmt-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/bulkmt/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/bulkmt-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 
