@@ -7,14 +7,17 @@ branches:
     - task08_2
 before_script:
   - mkdir build
-  - sudo apt update
 addons:
   apt:
+    sources:
+      - ubuntu-toolchain-r-test
     packages:
+      - g++-7
       - libboost-all-dev
       - libssl-dev
 script:
   - cd build
+  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cmake ..
   - cmake --build .
   - cmake --build . --target package
