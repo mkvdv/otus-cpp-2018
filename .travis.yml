@@ -1,5 +1,9 @@
 dist: xenial
 language: cpp
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
     - task09_2
