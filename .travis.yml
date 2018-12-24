@@ -1,7 +1,12 @@
+dist: xenial
 language: cpp
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
-  - task11
+    - task11
 before_script:
   - mkdir build
 addons:
@@ -24,5 +29,5 @@ deploy:
     on:
       branch: task11
     script:
-    - curl -T async_cli-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus11/async_cli/0.0.$TRAVIS_BUILD_NUMBER/async_cli-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+      - curl -T async_cli-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/async_cli/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/async_cli-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
 
