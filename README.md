@@ -1,7 +1,6 @@
 # Task 15 - k-means
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task15)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[![Download](https://api.bintray.com/packages/mkvdv/otus15/kkmeans/images/download.svg)](https://bintray.com/mkvdv/otus15/kkmeans/_latestVersion)
-
+[![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=kkmeans) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/kkmeans/link)
 ## Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
 * Requirements:
