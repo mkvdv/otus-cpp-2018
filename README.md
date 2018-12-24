@@ -1,6 +1,6 @@
 # Task 9 - Range
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task09_2)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[![Download](https://api.bintray.com/packages/mkvdv/otus09_2/range/images/download.svg)](https://bintray.com/mkvdv/otus09_2/range/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=range) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/range/link)
 
 
 ## Notes
