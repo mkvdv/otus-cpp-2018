@@ -1,9 +1,0 @@
-<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classotus_1_1BaseOnClickable.html" title="otus::BaseOnClickable\l\&lt; Args \&gt;" alt="" coords="5,125,169,166"/>
-<area shape="rect" id="node2" href="$classotus_1_1Canvas.html" title="otus::Canvas" alt="" coords="232,5,337,32"/>
-<area shape="rect" id="node3" href="$classotus_1_1ClearButton.html" title="otus::ClearButton" alt="" coords="217,56,352,83"/>
-<area shape="rect" id="node4" href="$classotus_1_1ColorButton.html" title="otus::ColorButton" alt="" coords="217,107,352,133"/>
-<area shape="rect" id="node5" href="$classotus_1_1OpenButton.html" title="otus::OpenButton" alt="" coords="217,157,352,184"/>
-<area shape="rect" id="node6" href="$classotus_1_1SaveButton.html" title="otus::SaveButton" alt="" coords="218,208,351,235"/>
-<area shape="rect" id="node7" href="$classotus_1_1ToolButton.html" title="otus::ToolButton" alt="" coords="222,259,347,285"/>
-</map>

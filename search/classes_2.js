@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['canvas',['Canvas',['../classotus_1_1Canvas.html',1,'otus']]],
-  ['clearbutton',['ClearButton',['../classotus_1_1ClearButton.html',1,'otus']]],
-  ['colorbutton',['ColorButton',['../classotus_1_1ColorButton.html',1,'otus']]],
-  ['controllerinterface',['ControllerInterface',['../classotus_1_1ControllerInterface.html',1,'otus']]]
+  ['no',['no',['../structotus_1_1my__traits_1_1has__begin__end_1_1no.html',1,'otus::my_traits::has_begin_end']]]
 ];

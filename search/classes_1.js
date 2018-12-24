@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['baselistenable',['BaseListenable',['../classotus_1_1BaseListenable.html',1,'otus']]],
-  ['baseonclickable',['BaseOnClickable',['../classotus_1_1BaseOnClickable.html',1,'otus']]],
-  ['baseonclickable_3c_20args_2e_2e_2e_20_3e',['BaseOnClickable&lt; Args... &gt;',['../classotus_1_1BaseOnClickable.html',1,'otus']]]
+  ['has_5fbegin_5fend',['has_begin_end',['../structotus_1_1my__traits_1_1has__begin__end.html',1,'otus::my_traits']]]
 ];

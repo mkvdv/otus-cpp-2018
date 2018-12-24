@@ -1,4 +1,0 @@
-<map id="otus::ModelInterface" name="otus::ModelInterface">
-<area shape="rect" id="node3" href="$classotus_1_1StandardModel.html" title="{otus::StandardModel\n||+ choose_tool()\l+ choose_color()\l+ add_element()\l+ delete_element_at()\l+ open()\l+ clear()\l+ save()\l+ get_elements()\l+ get_current_tool()\l+ get_current_color()\l}" alt="" coords="5,417,172,627"/>
-<area shape="rect" id="node2" href="$classotus_1_1BaseListenable.html" title="{Listenable\n||+ add_listener()\l+ notify_update()\l+ ~BaseListenable()\l}" alt="" coords="11,5,166,112"/>
-</map>

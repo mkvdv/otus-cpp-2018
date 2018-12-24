@@ -1,9 +1,0 @@
-<map id="src/model/imodel.h" name="src/model/imodel.h">
-<area shape="rect" id="node2" href="$model_8h.html" title="File with declaration of model (from MVC). " alt="" coords="359,80,501,107"/>
-<area shape="rect" id="node7" href="$view_8h.html" title="File with declaration of view (V from MVC). " alt="" coords="137,155,251,181"/>
-<area shape="rect" id="node3" href="$controller_8h.html" title="File with controller (from MVC) declaration. " alt="" coords="276,155,456,181"/>
-<area shape="rect" id="node5" href="$tester_8cpp.html" title="File with tester class for the whole programm. " alt="" coords="378,229,487,256"/>
-<area shape="rect" id="node6" href="$model_8cpp.html" title="File with implementation of model (from MVC). " alt="" coords="532,155,688,181"/>
-<area shape="rect" id="node4" href="$controller_8cpp.html" title="File with controller (from MVC) implementation. " alt="" coords="159,229,354,256"/>
-<area shape="rect" id="node8" href="$view_8cpp.html" title="File with implementation of view (V from MVC). " alt="" coords="5,229,135,256"/>
-</map>

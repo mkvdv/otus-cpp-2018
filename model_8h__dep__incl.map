@@ -1,6 +1,0 @@
-<map id="src/model/model.h" name="src/model/model.h">
-<area shape="rect" id="node2" href="$controller_8h.html" title="File with controller (from MVC) declaration. " alt="" coords="61,80,241,107"/>
-<area shape="rect" id="node4" href="$tester_8cpp.html" title="File with tester class for the whole programm. " alt="" coords="224,155,333,181"/>
-<area shape="rect" id="node5" href="$model_8cpp.html" title="File with implementation of model (from MVC). " alt="" coords="317,80,473,107"/>
-<area shape="rect" id="node3" href="$controller_8cpp.html" title="File with controller (from MVC) implementation. " alt="" coords="5,155,200,181"/>
-</map>

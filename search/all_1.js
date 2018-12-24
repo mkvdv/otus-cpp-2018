@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['baselistenable',['BaseListenable',['../classotus_1_1BaseListenable.html',1,'otus']]],
-  ['baseonclickable',['BaseOnClickable',['../classotus_1_1BaseOnClickable.html',1,'otus']]],
-  ['baseonclickable_3c_20args_2e_2e_2e_20_3e',['BaseOnClickable&lt; Args... &gt;',['../classotus_1_1BaseOnClickable.html',1,'otus']]],
-  ['blue',['BLUE',['../namespaceotus.html#a624313aec55ba4ebfc3499a4e7a67cb9a4684c5a66cf94d1670a53158e93fb2bf',1,'otus']]]
+  ['endian',['Endian',['../classotus_1_1details_1_1Endian.html',1,'otus::details']]],
+  ['equal_5ftypes',['equal_types',['../structotus_1_1my__traits_1_1equal__types.html',1,'otus::my_traits']]],
+  ['equal_5ftypes_3c_20a_2c_20b_2c_20args_2e_2e_2e_20_3e',['equal_types&lt; A, B, Args... &gt;',['../structotus_1_1my__traits_1_1equal__types_3_01A_00_01B_00_01Args_8_8_8_01_4.html',1,'otus::my_traits']]],
+  ['equal_5ftypes_3c_20t_20_3e',['equal_types&lt; T &gt;',['../structotus_1_1my__traits_1_1equal__types_3_01T_01_4.html',1,'otus::my_traits']]]
 ];
