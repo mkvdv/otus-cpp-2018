@@ -1,5 +1,7 @@
 dist: xenial
 language: cpp
+compiler:
+  - clang
 branches:
   only:
     - task08_2
@@ -8,14 +10,10 @@ before_script:
   - sudo apt update
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
     packages:
-      - g++-7
       - libboost-all-dev
       - libssl-dev
 script:
-  - CXX=/usr/bin/g++-7 CC=/usr/bin/gcc-7
   - cd build
   - cmake ..
   - cmake --build .
@@ -26,4 +24,4 @@ deploy:
     on:
       branch: task08_2
     script:
-      - curl -T bayan-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus08_2/bayan/0.0.$TRAVIS_BUILD_NUMBER/bayan-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+      - curl -T bayan-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/bayan/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/bayan-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"

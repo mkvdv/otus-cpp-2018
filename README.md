@@ -1,6 +1,6 @@
 # Task 8 - bayan
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task08_2)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[![Download](https://api.bintray.com/packages/mkvdv/otus08_2/bayan/images/download.svg)](https://bintray.com/mkvdv/otus08_2/bayan/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=bayan) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/bayan/link)
 
 Utility for detecting duplicate files.
 
