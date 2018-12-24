@@ -19,7 +19,7 @@ namespace otus {
 		virtual ~GeometryElement() = default;
 
 	private:
-		ColorTag tag_;
+      [[maybe_unused]] ColorTag tag_;
 	};
 
 	class Line : public GeometryElement {
@@ -31,7 +31,7 @@ namespace otus {
 
 	private:
 		int x0_, y0_;
-		int x1_, y1_;
+      [[maybe_unused]] int x1_, y1_;
 		utils::Logger logger_{"Line"};
 	};
 
@@ -44,9 +44,9 @@ namespace otus {
 
 	private:
 		int x_, y_;
-		int width_;
-		int height_;
-		float angle_;
+      [[maybe_unused]] int width_;
+      [[maybe_unused]] int height_;
+      [[maybe_unused]] float angle_;
 		utils::Logger logger_{"Rectangle"};
 	};
 

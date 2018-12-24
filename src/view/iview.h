@@ -11,5 +11,6 @@ namespace otus {
 	class ViewInterface {
 	public:
 		virtual void redraw() = 0;
+      virtual ~ViewInterface() = default;
 	};
 } // namespace otus
