@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.8)
 
-if ($ENV{TRAVIS_BUILD_NUMBER})
-    project(realty VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+if (DEFINED ENV{TRAVIS_BUILD_NUMBER} AND DEFINED ENV{VERSION_MAJOR} AND DEFINED ENV{VERSION_MINOR})
+    project(realty VERSION $ENV{VERSION_MAJOR}.$ENV{VERSION_MINOR}.$ENV{TRAVIS_BUILD_NUMBER})
 else ()
     project(realty VERSION 0.0.1)
 endif ()
@@ -39,7 +39,7 @@ macro(set_warning_flags target)
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 14
                 CXX_STANDARD_REQUIRED ON
-                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic;-Wno-unused-variable"
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         message("!!! MSVC DETECTED !!!!")
@@ -80,6 +80,8 @@ set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
 set(CPACK_PACKAGE_CONTACT noname@nomail.no)
+
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 # include will generate proper code for .deb generation
 include(CPack)

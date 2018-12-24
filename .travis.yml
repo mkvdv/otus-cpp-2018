@@ -1,5 +1,9 @@
 dist: xenial
 language: cpp
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
     - task16
@@ -27,4 +31,4 @@ deploy:
     on:
       branch: task16
     script:
-      - curl -T realty-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus16/realty/0.0.$TRAVIS_BUILD_NUMBER/realty-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+      - curl -T realty-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/realty/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/realty-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
