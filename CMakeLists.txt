@@ -45,7 +45,7 @@ macro(set_warning_flags target)
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 14
                 CXX_STANDARD_REQUIRED ON
-                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic;-Wno-unused-variable"
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         message("!!! MSVC DETECTED !!!!")
