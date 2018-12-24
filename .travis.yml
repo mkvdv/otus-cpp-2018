@@ -1,0 +1,26 @@
+dist: xenial
+language: cpp
+compiler:
+  - clang
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
+branches:
+  only:
+    - task06
+before_script:
+  - mkdir build
+script:
+  - cd build
+  - cmake ..
+  - cmake --build .
+  - cmake --build . --target test
+  - cmake --build . --target package
+deploy:
+  - provider: script
+    skip_cleanup: true
+    on:
+      branch: task06
+    script:
+      - curl -T matrix-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/matrix/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/matrix-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
