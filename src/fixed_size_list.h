@@ -52,7 +52,7 @@ namespace otus {
   fixed_size_list<T, CAPACITY>::fixed_size_list()
       : free_list_(static_cast<Node *>(::operator new[](CAPACITY * sizeof(Node)))),
         head_(free_list_) {
-      static_assert(CAPACITY >= MIN_CAPACITY);
+      static_assert(CAPACITY >= MIN_CAPACITY, "invalid capacity");
       assert(free_list_);
 
       // set up intrusive list pointers

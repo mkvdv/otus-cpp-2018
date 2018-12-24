@@ -1,6 +1,6 @@
 dist: xenial
 language: cpp
-compiler: clang
+compiler: gcc
 env:
   global:
     - VERSION_MAJOR=3

@@ -21,7 +21,6 @@ add_subdirectory(libs/gtest/googletest)
 ##########################################################
 
 find_package(Threads)
-
 add_executable(${PROJECT_NAME} ./src/main.cpp)
 
 add_executable(unit_tests
@@ -36,7 +35,7 @@ macro(set_warning_flags target)
         message("!!! GCC DETECTED !!!!")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address -Wall -Wextra -pedantic")
         set_target_properties(${target} PROPERTIES
-                CXX_STANDARD 17
+                CXX_STANDARD 14
                 CXX_STANDARD_REQUIRED ON
                 LINK_LIBRARIES pthread
                 COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address;-ggdb"
@@ -44,14 +43,14 @@ macro(set_warning_flags target)
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         message("!!! CLANG DETECTED !!!!")
         set_target_properties(${target} PROPERTIES
-                CXX_STANDARD 17
+                CXX_STANDARD 14
                 CXX_STANDARD_REQUIRED ON
                 COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-pedantic;-Wno-unused-variable"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         message("!!! MSVC DETECTED !!!!")
         set_target_properties(${target} PROPERTIES
-                CXX_STANDARD 17
+                CXX_STANDARD 14
                 CXX_STANDARD_REQUIRED ON
                 COMPILE_OPTIONS "/W4"
                 )
@@ -70,7 +69,7 @@ target_link_libraries(unit_tests
         )
 
 # install to bin folder our binaries
-install(TARGETS allocator RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
