@@ -58,5 +58,7 @@ set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
 set(CPACK_PACKAGE_CONTACT noname@nomail.no)
 
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+
 # include will generate proper code for .deb generation
 include(CPack)
