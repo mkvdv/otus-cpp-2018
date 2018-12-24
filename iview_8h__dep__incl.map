@@ -1,0 +1,7 @@
+<map id="src/view/iview.h" name="src/view/iview.h">
+<area shape="rect" id="node2" href="$controller_8h.html" title="File with controller (from MVC) declaration. " alt="" coords="5,80,185,107"/>
+<area shape="rect" id="node5" href="$view_8h.html" title="File with declaration of view (V from MVC). " alt="" coords="210,80,325,107"/>
+<area shape="rect" id="node3" href="$controller_8cpp.html" title="File with controller (from MVC) implementation. " alt="" coords="170,155,365,181"/>
+<area shape="rect" id="node4" href="$tester_8cpp.html" title="File with tester class for the whole programm. " alt="" coords="37,155,146,181"/>
+<area shape="rect" id="node6" href="$view_8cpp.html" title="File with implementation of view (V from MVC). " alt="" coords="389,155,519,181"/>
+</map>

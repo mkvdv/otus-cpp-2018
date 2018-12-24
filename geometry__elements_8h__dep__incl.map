@@ -1,0 +1,16 @@
+<map id="src/view/geometry_elements.h" name="src/view/geometry_elements.h">
+<area shape="rect" id="node2" href="$icontroller_8h.html" title="File with interface of abstract controller (from MVC). " alt="" coords="236,155,419,181"/>
+<area shape="rect" id="node8" href="$imodel_8h.html" title="File with interface of abstract model (from MVC). " alt="" coords="378,80,522,107"/>
+<area shape="rect" id="node11" href="$view__elements_8h.html" title="File with declaration of button and canvas classes. " alt="" coords="751,155,933,181"/>
+<area shape="rect" id="node13" href="$geomfactory_8h.html" title="File with interface of abstract geometry factory and declaration of standard geometry factory..." alt="" coords="547,80,713,107"/>
+<area shape="rect" id="node15" href="$geometry__elements_8cpp.html" title="File with implementation of geometry element classes. " alt="" coords="789,80,1021,107"/>
+<area shape="rect" id="node3" href="$controller_8h.html" title="File with controller (from MVC) declaration. " alt="" coords="237,229,417,256"/>
+<area shape="rect" id="node6" href="$view_8h.html" title="File with declaration of view (V from MVC). " alt="" coords="442,229,557,256"/>
+<area shape="rect" id="node4" href="$controller_8cpp.html" title="File with controller (from MVC) implementation. " alt="" coords="339,304,534,331"/>
+<area shape="rect" id="node5" href="$tester_8cpp.html" title="File with tester class for the whole programm. " alt="" coords="206,304,315,331"/>
+<area shape="rect" id="node7" href="$view_8cpp.html" title="File with implementation of view (V from MVC). " alt="" coords="559,304,688,331"/>
+<area shape="rect" id="node9" href="$model_8h.html" title="File with declaration of model (from MVC). " alt="" coords="70,155,211,181"/>
+<area shape="rect" id="node10" href="$model_8cpp.html" title="File with implementation of model (from MVC). " alt="" coords="5,229,161,256"/>
+<area shape="rect" id="node12" href="$view__elements_8cpp.html" title="File with implementation of button and canvas classes. " alt="" coords="743,229,941,256"/>
+<area shape="rect" id="node14" href="$geomfactory_8cpp.html" title="File with implementation of geometry factory class. " alt="" coords="545,155,726,181"/>
+</map>

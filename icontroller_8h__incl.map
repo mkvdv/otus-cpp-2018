@@ -1,0 +1,6 @@
+<map id="src/controller/icontroller.h" name="src/controller/icontroller.h">
+<area shape="rect" id="node2" href="$geometry__elements_8h.html" title="File with declaration of geometry element classes. " alt="" coords="41,80,247,107"/>
+<area shape="rect" id="node6" href="$onclick_8h.html" title="File with declaration of observer pattern classes. Two pairs of publishers and subscribers: OnClickLi..." alt="" coords="323,80,442,107"/>
+<area shape="rect" id="node3" href="$logger_8h.html" title="File with simple logger class declaration. " alt="" coords="5,155,120,181"/>
+<area shape="rect" id="node5" href="$tags_8h.html" title="File with declaration of some tool and color tags. Used as color and tool mode flag in model (M from ..." alt="" coords="144,155,248,181"/>
+</map>
