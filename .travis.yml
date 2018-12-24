@@ -2,7 +2,7 @@ dist: xenial
 language: cpp
 env:
   global:
-    - VERSION_MAJOR=3
+    - VERSION_MAJOR=1
     - VERSION_MINOR=0
 addons:
   apt:
