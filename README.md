@@ -1,7 +1,7 @@
 # Task03 - Allocator
 
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task03)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=3.0.164) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/3.0.164/link)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=allocator) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/allocator/link)
 
 
 ### How allocator designed
