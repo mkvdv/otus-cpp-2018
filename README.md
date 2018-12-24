@@ -1,6 +1,6 @@
 # Task04 - Print_ip
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task04)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=3.0.166) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/3.0.166/link)
+[ ![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=print_ip) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/print_ip/link)
 
 
 ### Documentation

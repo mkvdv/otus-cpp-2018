@@ -44,10 +44,10 @@ set_warning_flags(${PROJECT_NAME})
 
 # set up testing
 enable_testing()
-add_test(run_main ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/print_ip)
+add_test(run_main ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME})
 
 # install to bin folder our binaries
-install(TARGETS print_ip RUNTIME DESTINATION bin)
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 
 # generate .deb package
 set(CPACK_GENERATOR DEB)
