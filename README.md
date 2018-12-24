@@ -1,6 +1,6 @@
 # Task 14 - YAMR
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task14)](https://travis-ci.com/mkvdv/otus-cpp-2018)
-[![Download](https://api.bintray.com/packages/mkvdv/otus14/yamr/images/download.svg)](https://bintray.com/mkvdv/otus14/yamr/_latestVersion)
+[![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=yamr) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/yamr/link)
 
 ### Notes
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`

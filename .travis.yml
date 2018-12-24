@@ -1,4 +1,9 @@
+dist: xenial
 language: cpp
+env:
+  global:
+    - VERSION_MAJOR=1
+    - VERSION_MINOR=0
 branches:
   only:
     - task14
@@ -23,5 +28,4 @@ deploy:
     on:
       branch: task14
     script:
-      - curl -T yamr-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus14/yamr/0.0.$TRAVIS_BUILD_NUMBER/yamr-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
-
+      - curl -T yamr-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb -umkvdv:$BINTRAY_API_KEY "https://api.bintray.com/content/mkvdv/otus-cpp-2018/ha/yamr/$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER/yamr-$VERSION_MAJOR.$VERSION_MINOR.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
