@@ -15,12 +15,13 @@ include_directories(${Boost_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/server.cpp
+        src/server/server.cpp
         src/model/simple_table.cpp
         src/model/two_tables_storage.cpp
         src/jobs/request_job.cpp
         src/utils/utils.cpp
         tests/table_tests.cpp
+        src/server/session.cpp
         )
 
 add_executable(test_table
