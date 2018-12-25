@@ -41,7 +41,8 @@ add_library(${ASYNC_LIB}
 
 add_executable(${PROJECT_NAME}
         src/main.cpp
-        src/server.cpp
+        src/server/server.cpp
+        src/server/session.cpp
         src/exceptions/exception.cpp
         )
 
