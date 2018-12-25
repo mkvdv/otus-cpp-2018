@@ -3,9 +3,6 @@
 #include "server.h"
 
 namespace otus::server {
-  /**
-   * Server impl.
-   */
   BulkServer::BulkServer(unsigned short port, unsigned int bulk_size)
       : context_(async::connect(bulk_size)),
         ep_(ba::ip::tcp::v4(), port),
@@ -23,6 +20,7 @@ namespace otus::server {
                                std::placeholders::_2));
 
       auto clientSession = std::make_shared<ClientSession>(service_, context_);
+      BOOST_LOG_TRIVIAL(info) << clientSession << " session will async_accept";
       acceptor_.async_accept(clientSession->sock(),
                              std::bind(&BulkServer::handle_accept,
                                        shared_from_this(),
@@ -46,7 +44,7 @@ namespace otus::server {
 #ifdef DEBUG
       ++DEBUG_CNT;
       if (DEBUG_CNT >= 2) {
-          BOOST_LOG_TRIVIAL(info) << "No more new connection here, return from handle_accept";
+          BOOST_LOG_TRIVIAL(info) << "No more new connection here, acceptor will be closed";
           acceptor_.close();
           return;
       }
@@ -54,6 +52,8 @@ namespace otus::server {
 
       // async wait new connection
       auto waited_client_session = std::make_shared<ClientSession>(service_, context_);
+      BOOST_LOG_TRIVIAL(info) << waited_client_session << " session will async_accept";
+
       acceptor_.async_accept(waited_client_session->sock(),
                              std::bind(&BulkServer::handle_accept,
                                        shared_from_this(),

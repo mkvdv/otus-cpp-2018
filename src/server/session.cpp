@@ -57,10 +57,10 @@ namespace otus::server {
       using namespace std::placeholders;
 
       const char delimiter = '\n';
-      // BOOST_LOG_TRIVIAL(info) << this << " Will async_read_until now";
       ba::async_read_until(sock_,
                            read_buffer_,
                            delimiter,
                            std::bind(&ClientSession::on_read, shared_from_this(), _1, _2));
+      BOOST_LOG_TRIVIAL(info) << this << " session async_read_until now";
   }
 } // namespace otus 
