@@ -3,9 +3,6 @@
 #include "session.h"
 
 namespace otus::server {
-  /**
-   * ClientSession impl.
-   */
   ClientSession::ClientSession(ba::io_service &service,
                                std::shared_ptr<ThreadsafeQueue<ParseCommandJob>> request_queue,
                                std::shared_ptr<TwoTablesStorage> storage)
@@ -99,4 +96,4 @@ namespace otus::server {
   std::shared_ptr<TwoTablesStorage> ClientSession::get_storage() {
       return storage_;
   }
-} // namespace otus:;server
+} // namespace otus::server

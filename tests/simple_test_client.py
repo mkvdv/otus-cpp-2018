@@ -43,7 +43,7 @@ def tests(sock: socket.socket):
 
 def main():
     parser = argparse.ArgumentParser(description='Test Join Server')
-    parser.add_argument('-port', action='store', dest='port', help='Port number')
+    parser.add_argument('--port', action='store', dest='port', help='Port number')
     args = parser.parse_args()
 
     # Create a socket

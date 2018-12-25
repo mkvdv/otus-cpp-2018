@@ -4,12 +4,12 @@
 #include "session.h"
 
 namespace otus::server {
-  server::JoinServer::JoinServer(unsigned short port,
-                                 std::shared_ptr<ThreadsafeQueue<ParseCommandJob>> request_queue)
+  JoinServer::JoinServer(unsigned short port,
+                         std::shared_ptr<ThreadsafeQueue<ParseCommandJob>> request_queue)
       : requests_queue_(std::move(request_queue)), ep_(ba::ip::tcp::v4(), port),
         acceptor_(service_, ep_) {}
 
-  void server::JoinServer::run() {
+  void JoinServer::run() {
       using namespace std::placeholders;
 
       ba::signal_set sig(service_, SIGINT, SIGABRT);
@@ -28,10 +28,12 @@ namespace otus::server {
       service_.run();
   }
 
-  void server::JoinServer::handle_accept(const std::shared_ptr<server::ClientSession> &connected_client,
-                                         const boost::system::error_code &err) {
-      if (err) {
-          throw std::runtime_error("TODO REMOVE THIS EXCEPTION LATER");
+  void JoinServer::handle_accept(const std::shared_ptr<ClientSession> &connected_client,
+                                 const boost::system::error_code &err) {
+      if (err == boost::system::errc::operation_canceled) {
+          return;
+      } else if (err) {
+          throw std::runtime_error(std::string{"Unhandled error: "} + err.message());
       }
 
       using namespace std::placeholders;
@@ -56,12 +58,12 @@ namespace otus::server {
                                        _1));
   }
 
-  server::JoinServer::~JoinServer() {
+  JoinServer::~JoinServer() {
       requests_queue_->stop_wait_and_block_pushing();
       BOOST_LOG_TRIVIAL(info) << "### Server DTOR called";
   }
 
-  void server::JoinServer::signal_handler(const boost::system::error_code &, int) {
+  void JoinServer::signal_handler(const boost::system::error_code &, int) {
       BOOST_LOG_TRIVIAL(info) << "Signal handler called";
       acceptor_.close();
       requests_queue_->stop_wait_and_block_pushing();

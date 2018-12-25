@@ -1,4 +1,4 @@
-# task13 - Join Server
+# Task 13 - Join Server
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task13)](https://travis-ci.com/mkvdv/otus-cpp-2018)
 [![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=join_server) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/join_server/link)
 
