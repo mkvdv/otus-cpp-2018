@@ -29,6 +29,7 @@ namespace otus::server {
 
 #ifdef DEBUG
     size_t DEBUG_CNT = 0;
+    size_t DEBUG_MAX_CONNECTIONS_AT_ALL = 2;
 #endif
   }; // class BulkServer
 

@@ -31,9 +31,10 @@ namespace otus::server {
 
   void BulkServer::handle_accept(const std::shared_ptr<ClientSession> &connected_client,
                                  const boost::system::error_code &err) {
-      if (err) {
-          BOOST_LOG_TRIVIAL(error) << "in handle_accept: " << err.message() << std::endl;
+      if (err == boost::system::errc::operation_canceled) {
           return;
+      } else if (err) {
+          throw std::runtime_error(std::string{"Unhandled error: "} + err.message());
       }
 
       using namespace std::placeholders;
@@ -43,7 +44,7 @@ namespace otus::server {
 
 #ifdef DEBUG
       ++DEBUG_CNT;
-      if (DEBUG_CNT >= 2) {
+      if (DEBUG_CNT >= DEBUG_MAX_CONNECTIONS_AT_ALL) {
           BOOST_LOG_TRIVIAL(info) << "No more new connection here, acceptor will be closed";
           acceptor_.close();
           return;
