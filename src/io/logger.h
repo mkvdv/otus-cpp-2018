@@ -8,7 +8,7 @@ namespace otus {
 	 * File logger, that do nothing. Used in tests.
 	 */
 	class EmptyFileLogger: public IFileLogger {
-		void write_to_file(const time_point_t &, const std::string &) override;
+	  void write_to_file(const time_point_t &, const std::vector<std::string> &text_results) override;
 	};
 
 	/**
@@ -16,7 +16,8 @@ namespace otus {
 	 */
 	class FileLogger: public IFileLogger {
 	public:
-		void write_to_file(const time_point_t &time_point, const std::string &text) override;
+	  void write_to_file(const time_point_t &time_point,
+						 const std::vector<std::string> &text_results) override;
 	};
 
 	/**
@@ -25,7 +26,7 @@ namespace otus {
 	class BulkLogger: public IBulkLogger {
 	public:
 		explicit BulkLogger(std::ostream &ostream);
-		void log_output(const std::string &bulk_message) override;
+	  void log_output(const std::vector<std::string> &text_results) override;
 
 	private:
 		std::ostream &ostream_;

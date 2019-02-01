@@ -14,10 +14,12 @@ namespace otus {
 
   void BulkController::run_all_commands() {
       if (pool_->size()) {
-          std::string text = pool_->run_all_commands_and_clear();
+          // first -- prepare text, than add with this text writting ti console job
+          // and writing to file job
+          std::vector<std::string> results = pool_->run_all_commands_and_clear();
 
-          bulk_logger_->log_output(text);
-          file_logger_->write_to_file(pool_->get_first_cmd_time_point(), text);
+          bulk_logger_->log_output(results);
+          file_logger_->write_to_file(pool_->get_first_cmd_time_point(), results);
       }
   }
 
