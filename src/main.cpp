@@ -1,6 +1,8 @@
 #include "radix_tree/radix_tree.h"
 
 #include <iostream>
+#include <fstream>
+#include <cassert>
 
 int main() {
 

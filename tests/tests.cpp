@@ -26,13 +26,19 @@ BOOST_AUTO_TEST_SUITE(test_suite_main)
                "krual\n"
                "krusha\n"
                "kisusha\n"
-               "kikiska\n";
+               "kikiska\n"
+               "illlo\n"
+               "illeo\n"
+               "il\n";
 
       std::string abbrevation_expected = "alek alek\n"
                                          "aleks aleks\n"
                                          "aleksey alekse\n"
                                          "alena alen\n"
                                          "alesha ales\n"
+                                         "il i\n"
+                                         "illeo ille\n"
+                                         "illlo illl\n"
                                          "kikiska kik\n"
                                          "kisa kisa\n"
                                          "kiska kisk\n"
@@ -51,6 +57,10 @@ BOOST_AUTO_TEST_SUITE(test_suite_main)
                                   "|   | | ├─ey$\n"
                                   "|   ├─na$\n"
                                   "|   ├─sha$\n"
+                                  "├─il$\n"
+                                  "|  ├─l\n"
+                                  "|  | ├─eo$\n"
+                                  "|  | ├─lo$\n"
                                   "├─k\n"
                                   "| ├─i\n"
                                   "| | ├─kiska$\n"
@@ -67,6 +77,43 @@ BOOST_AUTO_TEST_SUITE(test_suite_main)
                                   "|  ├─ksim$\n"
                                   "|  ├─sha$\n"
                                   "├─rita$\n"
+                                  "├─sasha$\n";
+
+      otus::RadixTree tree;
+      otus::read_from_input(tree, input);
+
+      std::stringstream output_tree;
+      tree.print(output_tree);
+      BOOST_CHECK_EQUAL(tree_expected, output_tree.str());
+
+      std::stringstream output_abbrevation;
+      tree.print_abbreviations(output_abbrevation);
+      BOOST_CHECK_EQUAL(abbrevation_expected, output_abbrevation.str());
+  }
+
+  BOOST_AUTO_TEST_CASE(test_simple2) {
+      BOOST_CHECK(true);
+      std::stringstream input;
+      input << "alesha\n"
+               "sasha\n"
+               "aleksey\n"
+               "aleks\n"
+               "maksim\n"
+               "alek\n";
+
+      std::string abbrevation_expected = "alek alek\n"
+                                         "aleks aleks\n"
+                                         "aleksey alekse\n"
+                                         "alesha ales\n"
+                                         "maksim m\n"
+                                         "sasha s\n";
+
+      std::string tree_expected = "├─ale\n"
+                                  "|   ├─k$\n"
+                                  "|   | ├─s$\n"
+                                  "|   | | ├─ey$\n"
+                                  "|   ├─sha$\n"
+                                  "├─maksim$\n"
                                   "├─sasha$\n";
 
       otus::RadixTree tree;

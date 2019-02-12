@@ -19,8 +19,9 @@ namespace otus {
       Node() = default;
       Node(std::string &&label, size_t chars_depth, bool is_end);
 
-      Node(Node &&) = default;
-      Node &operator=(Node &&) = default;
+      Node(Node &&) noexcept = default;
+      Node &operator=(Node &&) noexcept = default;
+      void swap(Node &node) noexcept;
 
       std::map<char, Node> childs_{};
 
@@ -31,7 +32,7 @@ namespace otus {
 
     void print_node(const std::string &indent, const RadixTree::Node &node, std::ostream &os);
     void print_abbrevation_node(const RadixTree::Node &node, const std::string &acc, std::ostream &os);
-    Node &find_last(const std::string &s);
+    Node &find_last(const std::string &str);
 
    private:
     Node root_;

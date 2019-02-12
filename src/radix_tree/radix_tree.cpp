@@ -27,24 +27,30 @@ namespace otus {
   RadixTree::Node::Node(std::string &&label, size_t chars_depth, bool is_end)
       : label_(std::move(label)), chars_depth_(chars_depth), is_end_(is_end) {}
 
+  void RadixTree::Node::swap(RadixTree::Node &node) noexcept {
+      std::swap(label_, node.label_);
+      std::swap(chars_depth_, node.chars_depth_);
+      std::swap(is_end_, node.is_end_);
+  }
+
   /**
    * Retrun last node in trie branch, that matches string s (as most as it can)
    */
-  RadixTree::Node &RadixTree::find_last(const std::string &s) {
+  RadixTree::Node &RadixTree::find_last(const std::string &str) {
       Node *cur = &root_;
 
       size_t i = 0;
-      while (i != s.size()) {
-          auto next_node_it = cur->childs_.find(s[i]);
+      while (i != str.size()) {
+          auto next_node_it = cur->childs_.find(str[i]);
           if (next_node_it != cur->childs_.end()) {
               cur = &(next_node_it->second); // re-set
 
               // check that this node's label and next string portion are equal before going next
-              if (std::string_view{s.c_str() + i, std::min(cur->label_.size(), s.size() - i)} !=
-                  std::string_view{cur->label_}) {
+              if (std::string_view{str.c_str() + i, std::min(cur->label_.size(), str.size() - i)}
+                  != cur->label_) {
                   break; // no need to go to next
               }
-              i += std::min(cur->label_.size(), s.size() - i);
+              i += std::min(cur->label_.size(), str.size() - i);
           } else {
               break;
           }
@@ -66,63 +72,74 @@ namespace otus {
           }
       }
 
-      /* s_suffix -- the remaining part of string (not found as child of last node)
-       * next code will push it inside tree
-       *
-       * 2 cases
-       *  - 1 -- last.label_ is full prefix of suffix of s (so, len last.label < len of s
-       *  - 2 -- last.label_ is NOT full prefix,of s, so we need split this node and create 2
-       *    links to 2 nodes suffix of s and suffix of last.label_, and last.label_ will contain
-       *    max common prefix of both s and last.label_
+      // part of s, that match beggining of last.label_
+      std::string s_suffix = s.substr(last.chars_depth_);
+      size_t max_common_prefix_len = equal_prefix_size(s_suffix, last.label_); // number of matched
+      // chars in s_suffix and label
+
+      /**
+       * ## There are 5 Cases:
+       * * Not matched at all, so (probably, last is root)
+       *    - append s_suffix as new node
+       * * Mathed all label, so
+       *    - if label < s_suffix, append suffix of suffix
+       *    - if label == s_suffix, make label final
+       *    otherwise - case can't exist
+       * * Matched not all label, so
+       *    - if max_common_prefix_len == s_suffix.len() => split this node to 2 sequnced nodes (split
+       *    label, make first node final)
+       *    - if max_common_prefix_len < s_suffix.len() => split last to 3 nodes -- for max common
+       *    prefix, label's suffix and s_suffixes suffix
        */
 
-      std::string s_suffix = s.substr(last.chars_depth_);
-      size_t common_prefix_len = equal_prefix_size(s_suffix, last.label_);
 
-      if (common_prefix_len == last.label_.size()) {
-          // case 1 - add new link
-          last.label_ = last.label_.erase(common_prefix_len);
-          std::string suffix_of_suffix = s_suffix.substr(common_prefix_len);
-          char key = suffix_of_suffix[0];
-          last.childs_[key] = Node(std::move(suffix_of_suffix),
-                                   last.chars_depth_ + last.label_.size(),
-                                   true);
-      } else if (common_prefix_len == s.size()) {
-          // case 1.2 -- add new link, but shrink last
-          std::string last_suffix = last.label_.substr(common_prefix_len);
-          last.label_ = last.label_.erase(common_prefix_len);
-          char key = last_suffix[0];
-          last.childs_[key] = Node(std::move(last_suffix),
-                                   last.chars_depth_ + last.label_.size(),
-                                   true);
+      if (max_common_prefix_len == 0) { // append s_suffix as new node
+          Node new_node(std::move(s_suffix), last.chars_depth_, true);
+          last.childs_[new_node.label_[0]] = std::move(new_node);
+      } else if (max_common_prefix_len == last.label_.length()) {
+          if (last.label_.length() < s_suffix.length()) { // append suffix of suffix
+              std::string suffix_of_suffix = s_suffix.substr(last.label_.length());
+              char c = suffix_of_suffix[0];
+              last.childs_[c] = Node(std::move(suffix_of_suffix),
+                                     last.chars_depth_ + last.label_.size(),
+                                     true);
+          } else { // last.label_.length() == s_suffix.length()
+              last.is_end_ = true;
+          }
       } else {
-          // case 2 - split last node, add 2 childs
-          std::string last_suffix = last.label_.substr(common_prefix_len);
+          if (max_common_prefix_len == s_suffix.length()) {
+              // split this node to 2 sequnced nodes (split label, make first node final)
+              std::string suffix_of_label = last.label_.substr(max_common_prefix_len);
+              last.label_ = last.label_.substr(0, max_common_prefix_len);
 
-          // insert last node's suffix node if there is something to insert
-          if (!last_suffix.empty()) {
-              last.label_ = last.label_.erase(common_prefix_len);
-              char key = last_suffix[0];
+              Node next_node(std::move(suffix_of_label), last.chars_depth_ + last.label_.length(),
+                             last.is_end_);
+              next_node.childs_ = std::move(last.childs_);
+              last.childs_.clear();
+              last.childs_[next_node.label_[0]] = std::move(next_node);
+              last.is_end_ = true; // cause suffix ends here
 
-              Node last_suffix_node = Node(std::move(last_suffix),
-                                           last.chars_depth_ + last.label_.size(),
-                                           last.is_end_);
-              last_suffix_node.childs_ = std::move(last.childs_); // move tail of last node whith it's
-              // connection to next node
-              last.childs_ = std::map<char, Node>{};
+          } else { // max_common_prefix_len < s_suffix.len()
+              std::string suffix_of_label = last.label_.substr(max_common_prefix_len);
+              std::string suffix_of_s_suffix = s_suffix.substr(max_common_prefix_len);
+              last.label_ = last.label_.substr(0, max_common_prefix_len);
 
-              last.childs_[key] = std::move(last_suffix_node);
+              Node s_suffix_node(std::move(suffix_of_s_suffix),
+                                 last.chars_depth_ + last.label_.length(),
+                                 true); // cause it is new word
+              Node label_suffix_node(std::move(suffix_of_label),
+                                     last.chars_depth_ + last.label_.length(),
+                                     last.is_end_); // copy from lasy
+              label_suffix_node.childs_ = std::move(last.childs_);
+
+              last.childs_.clear();
+              char label_suffix_c = label_suffix_node.label_[0];
+              last.childs_[label_suffix_c] = std::move(label_suffix_node);
+              char s_suffix_c = s_suffix_node.label_[0];
+              last.childs_[s_suffix_c] = std::move(s_suffix_node);
+
+              last.is_end_ = false; // cause node was splitted, it's true gone to label_suffix_node
           }
-          if (last.is_end_) {
-              last.is_end_ = false;
-          }
-
-          // and new node
-          std::string suffix_of_suffix = s_suffix.substr(common_prefix_len);
-          char key = suffix_of_suffix[0];
-          last.childs_[key] = Node(std::move(suffix_of_suffix),
-                                   last.chars_depth_ + last.label_.size(),
-                                   true);
       }
   }
 

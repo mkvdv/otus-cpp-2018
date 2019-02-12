@@ -26,11 +26,11 @@ message("${CMAKE_CXX_COMPILER_ID}")
 macro(set_warning_flags target)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
         message("!!! GCC DETECTED !!!!")
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -fuse-ld=gold -fsanitize=address -Wall -Wextra -pedantic")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -Wall -Wextra -pedantic")
         set_target_properties(${target} PROPERTIES
                 CXX_STANDARD 17
                 CXX_STANDARD_REQUIRED ON
-                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-Wpedantic;-fsanitize=address;-ggdb"
+                COMPILE_OPTIONS "-O0;-Wall;-Wextra;-Werror;-Wpedantic;-ggdb"
                 )
     elseif (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
         message("!!! CLANG DETECTED !!!!")
