@@ -1,11 +1,8 @@
 #include "radix_tree.h"
 
-#include <memory>
-#include <cassert>
-#include <string>
-#include <iostream>
 #include <algorithm>
 #include <string_view>
+#include <utility>
 
 namespace otus {
   /**
@@ -24,25 +21,26 @@ namespace otus {
       return prefix_size;
   }
 
-  RadixTree::Node::Node(std::string &&label, size_t chars_depth, bool is_end)
-      : label_(std::move(label)), chars_depth_(chars_depth), is_end_(is_end) {}
+  RadixTree::Node::Node(std::string &&label, bool is_end)
+      : label_(std::move(label)), is_end_(is_end) {}
 
   void RadixTree::Node::swap(RadixTree::Node &node) noexcept {
       std::swap(label_, node.label_);
-      std::swap(chars_depth_, node.chars_depth_);
       std::swap(is_end_, node.is_end_);
   }
 
   /**
    * Retrun last node in trie branch, that matches string s (as most as it can)
    */
-  RadixTree::Node &RadixTree::find_last(const std::string &str) {
+  std::pair<RadixTree::Node &, RadixTree::chars_depth_t> RadixTree::find_last(const std::string &str) {
       Node *cur = &root_;
 
       size_t i = 0;
+      size_t chars_before_last_node = 0; // how many characters was in chain before last (returned) node
       while (i != str.size()) {
           auto next_node_it = cur->childs_.find(str[i]);
           if (next_node_it != cur->childs_.end()) {
+              chars_before_last_node += cur->label_.size();
               cur = &(next_node_it->second); // re-set
 
               // check that this node's label and next string portion are equal before going next
@@ -56,11 +54,11 @@ namespace otus {
           }
       }
 
-      return *cur;
+      return std::pair<RadixTree::Node &, RadixTree::chars_depth_t>{*cur, chars_before_last_node};
   }
 
   void RadixTree::add(const std::string &s) {
-      Node &last = find_last(s); // find last existed node, that we way on the string
+      auto[last, chars_before_last_node] = find_last(s); // find last existed node, that we way on the string
 
       // check that this string exist in tree in some way
       if (last.label_ == s) {
@@ -73,7 +71,7 @@ namespace otus {
       }
 
       // part of s, that match beggining of last.label_
-      std::string s_suffix = s.substr(last.chars_depth_);
+      std::string s_suffix = s.substr(chars_before_last_node);
       size_t max_common_prefix_len = equal_prefix_size(s_suffix, last.label_); // number of matched
       // chars in s_suffix and label
 
@@ -94,15 +92,13 @@ namespace otus {
 
 
       if (max_common_prefix_len == 0) { // append s_suffix as new node
-          Node new_node(std::move(s_suffix), last.chars_depth_, true);
+          Node new_node(std::move(s_suffix), true);
           last.childs_[new_node.label_[0]] = std::move(new_node);
       } else if (max_common_prefix_len == last.label_.length()) {
           if (last.label_.length() < s_suffix.length()) { // append suffix of suffix
               std::string suffix_of_suffix = s_suffix.substr(last.label_.length());
               char c = suffix_of_suffix[0];
-              last.childs_[c] = Node(std::move(suffix_of_suffix),
-                                     last.chars_depth_ + last.label_.size(),
-                                     true);
+              last.childs_[c] = Node(std::move(suffix_of_suffix), true);
           } else { // last.label_.length() == s_suffix.length()
               last.is_end_ = true;
           }
@@ -112,8 +108,7 @@ namespace otus {
               std::string suffix_of_label = last.label_.substr(max_common_prefix_len);
               last.label_ = last.label_.substr(0, max_common_prefix_len);
 
-              Node next_node(std::move(suffix_of_label), last.chars_depth_ + last.label_.length(),
-                             last.is_end_);
+              Node next_node(std::move(suffix_of_label), last.is_end_);
               next_node.childs_ = std::move(last.childs_);
               last.childs_.clear();
               last.childs_[next_node.label_[0]] = std::move(next_node);
@@ -124,12 +119,8 @@ namespace otus {
               std::string suffix_of_s_suffix = s_suffix.substr(max_common_prefix_len);
               last.label_ = last.label_.substr(0, max_common_prefix_len);
 
-              Node s_suffix_node(std::move(suffix_of_s_suffix),
-                                 last.chars_depth_ + last.label_.length(),
-                                 true); // cause it is new word
-              Node label_suffix_node(std::move(suffix_of_label),
-                                     last.chars_depth_ + last.label_.length(),
-                                     last.is_end_); // copy from lasy
+              Node s_suffix_node(std::move(suffix_of_s_suffix), true); // cause it is new word
+              Node label_suffix_node(std::move(suffix_of_label), last.is_end_); // copy from lasy
               label_suffix_node.childs_ = std::move(last.childs_);
 
               last.childs_.clear();

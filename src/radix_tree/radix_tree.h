@@ -2,7 +2,7 @@
 
 #include <istream>
 #include <map>
-#include <memory>
+#include <string>
 
 namespace otus {
   class RadixTree {
@@ -17,7 +17,7 @@ namespace otus {
    private:
     struct Node {
       Node() = default;
-      Node(std::string &&label, size_t chars_depth, bool is_end);
+      Node(std::string &&label, bool is_end);
 
       Node(Node &&) noexcept = default;
       Node &operator=(Node &&) noexcept = default;
@@ -26,13 +26,14 @@ namespace otus {
       std::map<char, Node> childs_{};
 
       std::string label_ = ""; // string on the link this node connected to parent
-      size_t chars_depth_ = 0; // how many characters was in chain before this node
       bool is_end_ = false;
     };
 
     void print_node(const std::string &indent, const RadixTree::Node &node, std::ostream &os);
     void print_abbrevation_node(const RadixTree::Node &node, const std::string &acc, std::ostream &os);
-    Node &find_last(const std::string &str);
+
+    using chars_depth_t = size_t;
+    std::pair<Node &, chars_depth_t> find_last(const std::string &str);
 
    private:
     Node root_;
