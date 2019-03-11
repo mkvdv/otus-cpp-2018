@@ -4,8 +4,6 @@
 
 #include "session.h"
 
-//#define DEBUG
-
 namespace otus::server {
   namespace ba = boost::asio;
 
@@ -26,11 +24,6 @@ namespace otus::server {
     void *context_;
     ba::ip::tcp::endpoint ep_;
     ba::ip::tcp::acceptor acceptor_;
-
-#ifdef DEBUG
-    size_t DEBUG_CNT = 0;
-    size_t DEBUG_MAX_CONNECTIONS_AT_ALL = 2;
-#endif
   }; // class BulkServer
 
 } // namespace otus::server

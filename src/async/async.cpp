@@ -4,8 +4,6 @@
 #include <map>
 #include <mutex>
 
-// it's real to do it today !!!!
-
 namespace otus::async {
 	namespace {
 		std::map<Context *, std::unique_ptr<Context>> g_contexts_;

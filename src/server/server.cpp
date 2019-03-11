@@ -26,7 +26,9 @@ namespace otus::server {
                                        shared_from_this(),
                                        clientSession,
                                        _1));
+      clientSession = nullptr; // otherwise blocking service_.run(); call doesn't allow session to die
       service_.run();
+      BOOST_LOG_TRIVIAL(info) << this << " exit BulkServer::run() function";
   }
 
   void BulkServer::handle_accept(const std::shared_ptr<ClientSession> &connected_client,
@@ -41,15 +43,6 @@ namespace otus::server {
       BOOST_LOG_TRIVIAL(info) << connected_client << " connected";
 
       connected_client->start();
-
-#ifdef DEBUG
-      ++DEBUG_CNT;
-      if (DEBUG_CNT >= DEBUG_MAX_CONNECTIONS_AT_ALL) {
-          BOOST_LOG_TRIVIAL(info) << "No more new connection here, acceptor will be closed";
-          acceptor_.close();
-          return;
-      }
-#endif
 
       // async wait new connection
       auto waited_client_session = std::make_shared<ClientSession>(service_, context_);

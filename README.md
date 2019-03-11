@@ -10,7 +10,7 @@
 ./build/bin/bulk_server --port=9000 --bulk_size=3
 ```
 
-* You can enable inner loggingm if you want, using  `logging` parameter:
+* You can enable inner logging if you want, using  `logging` parameter:
 ```bash
 ./build/bin/bulk_server --port=9000 --bulk_size=3 --logging=true
 ```
