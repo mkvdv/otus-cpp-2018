@@ -24,7 +24,7 @@ namespace otus::server {
                                        shared_from_this(),
                                        clientSession,
                                        _1));
-
+      clientSession = nullptr;
       service_.run();
   }
 
@@ -40,14 +40,6 @@ namespace otus::server {
       BOOST_LOG_TRIVIAL(info) << connected_client << " connected";
 
       connected_client->start();
-
-#ifdef DEBUG
-      ++DEBUG_CNT;
-      if (DEBUG_CNT >= 3) {
-          BOOST_LOG_TRIVIAL(info) << "No more new connection here";
-          return;
-      }
-#endif
 
       // async wait new connection
       auto waited_client_session = std::make_shared<ClientSession>(service_, requests_queue_, storage_);

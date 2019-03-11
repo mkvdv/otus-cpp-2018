@@ -6,8 +6,6 @@
 #include "../jobs/request_job.h"
 #include "../model/two_tables_storage.h"
 
-// #define DEBUG
-
 namespace otus::server {
   namespace ba = boost::asio;
 
@@ -32,10 +30,6 @@ namespace otus::server {
 
     ba::ip::tcp::endpoint ep_;
     ba::ip::tcp::acceptor acceptor_;
-
-#ifdef DEBUG
-    size_t DEBUG_CNT = 0;
-#endif
   };
 
 } // namespace otus::server
