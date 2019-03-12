@@ -25,8 +25,6 @@ Use Boost::ASIO for network.
 
 * [Nickname](https://github.com/mkvdv/otus-cpp-2018/tree/task07_2) - Radix tree implementation
 
-* [Editor](https://github.com/mkvdv/otus-cpp-2018/tree/task05) - example of MVC pattern, graphical editor on stubs =)
-
 * [PrintIp](https://github.com/mkvdv/otus-cpp-2018/tree/task04) - example of 
 [SFINAE](https://en.wikipedia.org/wiki/Substitution_failure_is_not_an_error) usage 
 
