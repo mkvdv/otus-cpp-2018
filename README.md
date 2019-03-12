@@ -1,9 +1,9 @@
-# Task 16 - Realty (Clusterization, classification and regression)
+# Task 16 - Realty
 
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task16)](https://travis-ci.com/mkvdv/otus-cpp-2018)
 [![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=realty) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/realty/link)
 
-Tool for realty clusterization and clasterization.
+Tool for realty clusterization and classification.
 
 ## Notes
 * Task description you can find [here](16.realty.pdf).
