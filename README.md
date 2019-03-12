@@ -2,7 +2,10 @@
 [![Build Status](https://travis-ci.com/mkvdv/otus-cpp-2018.svg?branch=task14)](https://travis-ci.com/mkvdv/otus-cpp-2018)
 [![Download](https://api.bintray.com/packages/mkvdv/otus-cpp-2018/ha/images/download.svg?version=yamr) ](https://bintray.com/mkvdv/otus-cpp-2018/ha/yamr/link)
 
+Tool for launching tasks as MapReduce programming model.
+
 ### Notes
+* Task description you can find [here](14.yamr.pdf).
 * All build files must be done in `build` directory (created by `.travis.yml`), all binaries are in `build/bin`
 
 ### Usage
